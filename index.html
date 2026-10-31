@@ -283,6 +283,24 @@
   details.tk .write{ background:rgba(184,134,11,.10); border:1px solid var(--gold-deep); border-radius:8px; padding:8px 12px; margin-top:4px; }
   .devs{ margin:2px 0 8px; display:flex; flex-wrap:wrap; gap:5px; }
   .dev{ font-size:11.5px; border:1px solid #bda87a; border-radius:10px; padding:1px 8px; color:#5a4a30; background:rgba(255,255,255,.5); }
+
+  .q3{ background:rgba(255,255,255,.55); border:1px solid #e0d1a8; border-radius:8px; padding:10px 12px; margin-bottom:10px; }
+  .q3 .q3h{ font-size:11.5px; color:#8a6f44; text-transform:uppercase; letter-spacing:1px; margin-bottom:3px; }
+  .q3 .q3h span{ color:#8f3320; font-weight:bold; }
+  .q3 .q3q{ font-size:14px; color:#2e2312; margin-bottom:6px; line-height:1.45; }
+  .q3 textarea, .tkw textarea{ min-height:74px; font-size:14px; }
+  .q3 .q3m{ background:rgba(79,124,62,.10); border-left:4px solid var(--olive); padding:8px 11px; border-radius:6px; font-size:13.5px; color:#2e2312; line-height:1.5; }
+  .q3 .q3m b{ display:block; font-size:11px; letter-spacing:1.3px; text-transform:uppercase; color:#3a6b30; margin-bottom:2px; }
+  .nnotes{ min-height:110px; }
+  mark.hl.read::after{ content:none; }
+  mark.hl.done3::after{ content:"✓"; font-size:9px; color:#4f7c3e; vertical-align:super; margin-left:1px; }
+  details.tk.done3 summary .tkname::after{ content:" ✓"; color:#4f7c3e; font-size:13px; }
+  .tedition{ background:#7a2f1e; color:#fbe9c4; text-align:center; font-size:12.5px; letter-spacing:1.5px; padding:6px; border-radius:8px; margin-bottom:12px; }
+  .script-note{ border-top:1px solid #d9c9a0; padding:14px 0 6px; }
+  .script-note .sl{ font-size:12px; color:#8a6f44; letter-spacing:1px; text-transform:uppercase; }
+  .script-note .slat{ font-size:16px; color:#2b2012; font-style:italic; margin:3px 0 2px; }
+  .script-note .str{ color:#5a4a30; margin-bottom:6px; }
+  @media print{ .script-note{ page-break-inside:avoid; } .q3 textarea{ min-height:60px; } }
 </style>
 </head>
 <body>
@@ -319,485 +337,1087 @@
    Extra fields used by Vivek's shell: howText, ragText, toolkit[], notes[id].devices[]
    ===================================================================== */
 const BOOKLET = {
-  id: "HVC1", book: "hvvivek27-c1", num: 2,
-  docTitle: "Heroes C1 (Vivek)", bookno: "BOOKLET C1 · VIVEK",
-  series: "Eduqas GCSE Latin · Component 2 · Heroes and Villains (2027–29)",
-  title: "Cicero: the orator as hero",
-  subtitle: "<i>Philippic</i> 2.118–119",
-  strap: "Cicero, <i>Philippic</i> 2.118–119 · the last paragraph of a speech that was never delivered · November 44 BC",
-  gateLine: "One old man tells the senate he would rather die than see Rome unfree. Every sentence is built to be believed.",
-  firstBooklet: false,
-
-  howText: "One passage, set out with the Latin on the left and a translation on the right. Start with the <b>Toolkit</b> tab: it lists every rhetorical device the examiner can expect you to recognise in this text, with the Latin where it happens and a model sentence showing how to write it up. Then read the passage. The coloured phrases in the Latin are the places where a question can be asked: tap one and its note opens beside the text, naming the devices in that phrase, what Cicero does, the effect, and three model sentences for the three kinds of question. At the end there are twelve exam-style questions covering every question type you will meet on a prose passage; the <b>Practice</b> tab adds three further sets, 23 questions, built like the Section A paper; and <b>Together</b> has a 16-mark essay paragraph. Answer, press <b>Reveal</b>, mark yourself. Everything saves to the class store and follows you to any device.",
-
-  ragText: "How confident do you feel about this passage?",
-
-  themeNote: "The specification's first idea is <b>the characteristics of a Roman hero</b>, and the Resource Booklet lists Cicero as one of its three heroes, alongside Horatius on the bridge and Augustus at Actium. He is the odd one out: no sword, no river, no battle. His heroism is a claim made in words, and the examiner's questions on this text are nearly all about <i>how the words are made to work</i>. So the skill this booklet builds is recognition: seeing the antithesis, the metaphor, the rhetorical question, the word placed last for emphasis, and then saying what each one does for Cicero's case. Keep the standard formula in view throughout: <b>quote the Latin, translate it, say what Cicero does with it, link it to the question</b>. Naming a device earns nothing on its own; a device named, quoted and explained earns two marks every time.",
-
-  /* =================================================================
-     TOOLKIT · the devices to recognise, each located in this text
-     ================================================================= */
-  toolkit: [
-    { id:"antithesis", cat:"structure", name:"Antithesis", aka:"contrast, opposition",
-      def:"Two ideas set against each other in matching positions, so that the contrast does the arguing.",
-      lat:"defendi rem publicam adulescens, non deseram senex", tr:"I defended the republic as a young man; I shall not desert it as an old one",
-      where:"Line 1. Perfect <i>defendi</i> against future <i>deseram</i>; <i>adulescens</i> against <i>senex</i>; 'defended' against 'desert'.",
-      effect:"A whole career is compressed into one balanced line, and consistency is asserted rather than argued. The listener accepts the shape of the sentence before testing its truth.",
-      write:"Cicero opens with an antithesis, <i>defendi rem publicam adulescens, non deseram senex</i>, 'I defended the republic as a young man; I shall not desert it as an old one': the past tense is set against the future and youth against age, so that his loyalty is presented as a lifelong fact rather than a promise." },
-
-    { id:"asyndeton", cat:"structure", name:"Asyndeton", aka:"leaving out connectives",
-      def:"Clauses or words placed side by side with no 'and', 'but' or 'for' between them.",
-      lat:"defendi ... senex: contempsi ... tuos", tr:"I defended ... old one: I scorned ... yours",
-      where:"Lines 1–2. Four clauses, no connective at all; the colon marks the join.",
-      effect:"The sentence sounds clipped and certain. Connectives explain how ideas relate; leaving them out makes each clause land as a separate blow and gives the passage the rhythm of a man who does not need to argue.",
-      write:"The four clauses of lines 1–2 are joined by nothing at all, <i>defendi ... non deseram ... contempsi ... non pertimescam</i>: the asyndeton makes each claim fall like a separate blow, and the absence of any 'because' or 'but' leaves the senate nothing to dispute." },
-
-    { id:"parallelism", cat:"structure", name:"Parallelism", aka:"balance, isocolon, balanced clauses",
-      def:"Two phrases or clauses built to the same pattern, word for word, so that the second echoes the first.",
-      lat:"contempsi Catilinae gladios, non pertimescam tuos", tr:"I scorned the swords of Catiline; I shall not be terrified of yours",
-      where:"Lines 1–2. The second sentence copies the first exactly: perfect verb, then <i>non</i> + future verb; a named enemy, then <i>tuos</i>.",
-      effect:"Because the shapes match, the senate hears Antony as the new Catiline without Cicero having to say so. Parallel structure is how an orator makes a comparison that cannot be answered.",
-      write:"Cicero repeats the pattern of his first sentence in <i>contempsi Catilinae gladios, non pertimescam tuos</i>, 'I scorned the swords of Catiline; I shall not be terrified of yours': the matching shape puts Antony's swords in the exact position of Catiline's, so that the comparison is made by the structure and Antony is condemned without being named." },
-
-    { id:"anaphora", cat:"sound", name:"Anaphora and repetition", aka:"repeated word at the start of successive clauses",
-      def:"The same word or phrase repeated at the beginning of successive clauses (anaphora), or repeated for emphasis anywhere.",
-      lat:"non deseram ... non pertimescam", tr:"I shall not desert ... I shall not be terrified",
-      where:"Lines 1–2. <i>non</i> opens both second halves; <i>negavi ... negabo</i> (lines 5–6) and <i>unum ... alterum</i> (lines 8–10) are further patterned repetitions.",
-      effect:"Repetition fixes the key idea, and here the key idea is refusal. Each <i>non</i> is a 'no' to Antony, and the ear registers the refusal before the mind processes the clause.",
-      write:"The repeated <i>non</i> in <i>non deseram ... non pertimescam</i>, 'I shall not desert ... I shall not be terrified', makes refusal the keynote of the opening: each negative is a 'no' to Antony, and the repetition turns two separate claims into a single act of defiance." },
-
-    { id:"tense", cat:"structure", name:"Tense contrast", aka:"past against future",
-      def:"A perfect verb set beside a future verb so that what was done guarantees what will be done.",
-      lat:"defendi ... deseram; contempsi ... pertimescam; negavi ... negabo", tr:"I defended ... I shall desert; I scorned ... I shall fear; I said ... I shall say",
-      where:"Lines 1–2 and 5–6. Three times in six lines.",
-      effect:"The past is Cicero's evidence; the future is his promise. By pairing them he makes his record of 63 BC the proof of what he will do in 44 BC. This is the grammatical form of his whole argument: I have done it before, so believe me now.",
-      write:"The perfect <i>contempsi</i> set against the future <i>pertimescam</i> turns the victory over Catiline into a guarantee: Cicero's past conduct is offered as the evidence for his future courage, so that the senate is asked to trust a record rather than a promise." },
-
-    { id:"apostrophe", cat:"order", name:"Apostrophe and direct address", aka:"turning to address someone",
-      def:"Speaking directly to a person who is not the main audience, or addressing the audience by a formal title.",
-      lat:"non pertimescam tuos ... patres conscripti", tr:"I shall not be terrified of yours ... senators",
-      where:"Line 2 (<i>tuos</i>, to Antony, who is not present); line 7 (<i>patres conscripti</i>, 'conscript fathers', the formal address to the senate).",
-      effect:"<i>tuos</i> makes Antony present as the man being defied, and turns a pamphlet into a confrontation. <i>patres conscripti</i> makes the senators witnesses to a vow, so that Cicero's wish for death is said on the record.",
-      write:"Cicero turns on Antony directly with <i>non pertimescam tuos</i>, 'I shall not be terrified of yours', the one word <i>tuos</i> addressing a man who is not in the room, so that the senate watches the orator face his enemy rather than merely describe him." },
-
-    { id:"metonymy", cat:"word", name:"Metonymy", aka:"the part or the symbol for the thing",
-      def:"Naming one thing by something closely associated with it: the swords for the violence, the body for the life.",
-      lat:"Catilinae gladios ... corpus", tr:"the swords of Catiline ... my body",
-      where:"Line 2 (<i>gladios</i>, 'swords', for Catiline's whole armed threat); line 2 (<i>corpus</i>, 'body', for his life).",
-      effect:"A concrete noun does what an abstract one cannot: 'swords' makes the senate see steel, 'body' makes them see a corpse. Cicero's danger and his sacrifice are both made physical.",
-      write:"By <i>contempsi Catilinae gladios</i>, 'I scorned the swords of Catiline', Cicero makes the threat of 63 BC a physical one: the metonymy of swords for the conspiracy's violence lets the senate picture steel, and the same steel is then transferred, by <i>tuos</i>, to Antony." },
-
-    { id:"climax", cat:"structure", name:"Climax and escalation", aka:"going one step further",
-      def:"A series in which each step raises the stakes, often signalled by 'indeed', 'even', 'what is more'.",
-      lat:"quin etiam ... iam etiam optanda mors est", tr:"Indeed, even ... now death is even something to be wished for",
-      where:"Line 2 (<i>quin etiam</i>, 'indeed, even', raising defiance to self-sacrifice); line 7 (<i>iam etiam</i>, 'now even', raising not fearing death to wanting it).",
-      effect:"The argument moves in steps, and each step is marked so that the senate feels it: I will not desert; I will not fear; I would die; I would even wish to die. By the end, death is not a risk but a desire.",
-      write:"<i>quin etiam</i>, 'indeed, even', marks the step from defiance to self-sacrifice in <i>quin etiam corpus libenter obtulerim</i>, 'indeed, I would gladly offer my body': the signposted escalation lets the senate feel the claim rising from refusal to fear Antony to readiness to die, so that the offer of his life arrives as the natural next step rather than a boast." },
-
-    { id:"position", cat:"order", name:"Emphatic word position", aka:"word order, placing a word first or last, hyperbaton",
-      def:"Latin word order is free, so a word put first, last, or out of its expected place carries emphasis. Hyperbaton is the separation of words that belong together.",
-      lat:"corpus libenter obtulerim ... populum Romanum liberum relinquam", tr:"my body gladly I would offer ... the Roman people free I would leave",
-      where:"Lines 2–3 (<i>libenter</i> wedged between <i>corpus</i> and <i>obtulerim</i>); line 9 (<i>liberum</i> placed before the verb, as the last thing said of the Roman people); line 9 (<i>hoc mihi maius ... nihil potest</i>, with <i>nihil</i> held back to the end).",
-      effect:"The displaced word is the one the ear catches. <i>libenter</i>, 'gladly', is the whole point of the offer; <i>liberum</i>, 'free', is the whole point of the speech; <i>nihil</i>, 'nothing', closes the parenthesis with the gods' greatest gift.",
-      write:"Cicero places <i>libenter</i> between <i>corpus</i> and <i>obtulerim</i>, 'my body ... gladly ... I would offer', separating the noun from its verb so that the adverb is the word the senate hears: the sacrifice is not merely accepted but welcomed, which is the difference between a victim and a hero." },
-
-    { id:"alliteration", cat:"sound", name:"Alliteration", aka:"repeated initial sound",
-      def:"The same consonant sound beginning neighbouring words.",
-      lat:"morte mea ... populi ... pariat ... parturit ... mihi maius", tr:"by my death ... of the people ... may give birth ... has been in labour ... to me greater",
-      where:"Line 3 (<i>m</i>: <i>morte mea</i>); lines 3–4 (<i>p</i>: <i>populi ... pariat ... parturit</i>); line 9 (<i>m</i>: <i>mihi maius</i>). The <i>m</i> sound runs through the whole passage: <i>mortem immaturam ... mihi ... mors ... moriens</i>.",
-      effect:"Sound binds the words it touches. <i>morte mea</i> stresses whose death is on offer; the <i>p</i> sounds give the childbirth metaphor its pushing, laboured rhythm. Always say what the sound does, never just that it is there.",
-      write:"The alliteration of <i>morte mea</i>, 'by my death', binds the death to the man: the repeated <i>m</i> makes the senate hear that the price of freedom is Cicero's own life, and the sound carries on through <i>mihi ... mors ... moriens</i> so that death becomes the passage's recurring note." },
-
-    { id:"metaphor", cat:"word", name:"Metaphor", aka:"image, figurative language",
-      def:"Describing one thing in the language of another: here money and childbirth.",
-      lat:"repraesentari morte mea libertas ... dolor populi Romani pariat quod iam diu parturit", tr:"freedom paid for at once by my death ... the anguish of the Roman people may give birth to what it has long been in labour with",
-      where:"Line 3 (<i>repraesentari</i>, a commercial word, 'to pay in cash', 'to realise immediately'); lines 3–4 (<i>pariat ... parturit</i>, the state's suffering as a pregnancy).",
-      effect:"The money metaphor makes his life a price and Rome's freedom a purchase: a bargain anyone would take. The childbirth metaphor makes Rome's suffering purposeful, a labour that must end in something new, and his death the moment of delivery.",
-      write:"Cicero turns the state's suffering into a pregnancy in <i>dolor populi Romani pariat quod iam diu parturit</i>, 'the anguish of the Roman people may give birth to what it has long been labouring to deliver': the metaphor makes Rome's pain purposeful, a labour with an end in view, and his own death the moment that brings the republic's freedom to birth." },
-
-    { id:"personification", cat:"word", name:"Personification", aka:"giving a thing human action",
-      def:"An abstract noun or a thing made to act like a person.",
-      lat:"dolor populi Romani pariat", tr:"the anguish of the Roman people may give birth",
-      where:"Lines 3–4. <i>dolor</i>, 'anguish', is the subject of <i>pariat</i>, 'may give birth'.",
-      effect:"The Roman people become a single suffering body, a mother in labour, and Cicero stands beside her. The image gives the people a will and a direction, which is exactly what Cicero wants the senate to supply.",
-      write:"By making <i>dolor</i>, 'anguish', the subject of <i>pariat</i>, 'may give birth', Cicero personifies the Roman people's suffering as a woman in labour: the state is given a body that wants to deliver itself of Antony, and Cicero's death becomes the act that helps it." },
-
-    { id:"polyptoton", cat:"sound", name:"Polyptoton", aka:"the same root in different forms",
-      def:"Two or more words from the same root in different grammatical forms close together.",
-      lat:"pariat ... parturit; cuique ... quisque", tr:"may give birth ... has been in labour; to each ... each",
-      where:"Lines 3–4 (<i>pariat / parturit</i>, both from the root of giving birth); lines 10–11 (<i>cuique / quisque</i>, 'each').",
-      effect:"The echo keeps the idea alive across the sentence. <i>parturit</i> is the long labour, <i>pariat</i> the birth: the two forms show the process and its end. <i>cuique ... quisque</i> gives the final wish an even, balanced sound, the sound of justice.",
-      write:"The polyptoton <i>pariat ... parturit</i>, 'may give birth ... has been in labour', holds the childbirth image across the clause: <i>parturit</i> is the long labour the Roman people have endured under Antony, <i>pariat</i> the delivery that Cicero's death would bring, so that the grammar itself moves from suffering to release." },
-
-    { id:"exclamation", cat:"sound", name:"Exclamation", aka:"exclamatio",
-      def:"A sentence spoken with raised feeling, marked in a modern text by an exclamation mark.",
-      lat:"quin etiam corpus libenter obtulerim ... parturit!", tr:"Indeed, I would gladly offer my body ... labouring to deliver!",
-      where:"Lines 2–4. The whole sentence of self-sacrifice is an exclamation.",
-      effect:"The raised voice marks the passage's emotional peak. Everything before it is argument; this is feeling, and the senate is meant to feel it with him. Pathos, the appeal to emotion, is concentrated here.",
-      write:"The exclamation that runs from <i>quin etiam</i> to <i>parturit!</i> raises the voice at the moment Cicero offers his life: the sentence of self-sacrifice is spoken with feeling rather than argued, so that the senate is asked to be moved before it is asked to be convinced." },
-
-    { id:"rhetq", cat:"structure", name:"Rhetorical question", aka:"a question with only one possible answer",
-      def:"A question asked for effect, where the listener is made to supply the obvious answer.",
-      lat:"quanto verius nunc negabo seni?", tr:"how much more truly shall I now say it for an old man?",
-      where:"Line 6.",
-      effect:"The senate answers the question for him, and so agrees with him. A statement can be disputed; a question whose answer is obvious makes the audience do the work of agreeing.",
-      write:"Cicero ends his reasoning with the rhetorical question <i>quanto verius nunc negabo seni?</i>, 'how much more truly shall I now say it for an old man?': the senate is made to supply the answer, that death cannot be untimely for him now, so that his readiness to die is agreed to by the listeners rather than asserted by the speaker." },
-
-    { id:"afortiori", cat:"structure", name:"Argument from the stronger case", aka:"a fortiori, 'how much more'",
-      def:"If something was true in a weaker case, it must be true in a stronger one.",
-      lat:"si ... negavi posse mortem immaturam esse consulari, quanto verius nunc negabo seni?", tr:"if I said that death could not be untimely for a man who had been consul, how much more truly shall I now say it for an old man?",
-      where:"Lines 4–6. The <i>si</i>-clause gives the weaker case (a consul of 43), <i>quanto verius</i> gives the stronger (an old man of 62).",
-      effect:"The logic is simple and hard to resist: if death was acceptable then, it is more acceptable now. This is logos, the appeal to reason, and it gives the emotional claim of lines 2–4 a rational floor.",
-      write:"Cicero argues from the stronger case in <i>si ... negavi posse mortem immaturam esse consulari, quanto verius nunc negabo seni?</i>: if death could not come too early for a consul of forty-three, it cannot come too early for an old man of sixty-two, and the <i>si</i> ... <i>quanto verius</i> structure makes the senate follow the reasoning step by step to the conclusion he wants." },
-
-    { id:"deixis", cat:"context", name:"Deixis", aka:"pointing words: this, here, now",
-      def:"Words that point to the speaker's own place and time, as if the speech were happening live.",
-      lat:"hoc ipso in templo ... nunc", tr:"in this very temple ... now",
-      where:"Lines 5 and 6. <i>hoc ipso</i>, 'this very', points at the temple of Concord; <i>nunc</i> at the present moment.",
-      effect:"A pamphlet is made to feel like a speech. The senators are placed in the room where they followed Cicero against Catiline in 63 BC, so that the building itself argues that they should follow him again.",
-      write:"The pointing words <i>hoc ipso in templo</i>, 'in this very temple', put the senate back in the temple of Concord where it heard Cicero against Catiline nearly twenty years before: the setting becomes a witness, and the deixis gives a written pamphlet the immediacy of a man speaking in the room." },
-
-    { id:"selfref", cat:"context", name:"Self-reference and ethos", aka:"the speaker's own record as evidence",
-      def:"The speaker builds his authority (ethos) by reminding the audience of who he is and what he has done.",
-      lat:"negavi ... negabo; perfuncto rebus eis quas adeptus sum quasque gessi", tr:"I said ... I shall say; having completed the things I attained and the things I achieved",
-      where:"Lines 5–6 (quoting his own Fourth Catilinarian); lines 7–8 (the summary of his honours and deeds). Note how many verbs are first person: <i>defendi, deseram, contempsi, pertimescam, obtulerim, negavi, negabo, opto, relinquam</i>.",
-      effect:"Cicero is the hero of his own speech, and the speech never lets the senate forget it. The first-person verbs stack up until the orator and the republic seem to be the same cause. Ethos is the Greek word for this appeal: believe me because of who I am.",
-      write:"Cicero grounds his readiness to die in his own record, <i>perfuncto rebus eis quas adeptus sum quasque gessi</i>, 'having completed the things I attained and the things I achieved': the paired relative clauses, honours and deeds, make a finished career the reason he can face death, and remind the senate in the same sentence of what it owes him." },
-
-    { id:"gerundive", cat:"word", name:"The gerundive of obligation", aka:"'is to be ...', 'must be ...'",
-      def:"The -ndus form with <i>est</i>, meaning something 'must be' or 'is to be' done; the person who must do it goes in the dative.",
-      lat:"mihi ... optanda mors est", tr:"for me death is to be wished for",
-      where:"Lines 6–7. <i>optanda</i> agrees with <i>mors</i>; <i>mihi</i> is the dative of agent.",
-      effect:"The gerundive makes the wish sound like a duty: death is not something Cicero happens to want but something that ought to be wanted. It is the grammar of obligation applied to his own end, the language of a martyr.",
-      write:"The gerundive in <i>mihi ... optanda mors est</i>, 'for me death is to be wished for', turns a feeling into an obligation: Cicero does not say he wants to die but that death ought to be wanted, so that his readiness for martyrdom is presented as the correct response of a man who has finished his work." },
-
-    { id:"enumeration", cat:"structure", name:"Enumeration", aka:"numbered points, 'one ... the other'",
-      def:"Listing points by number so that the structure of the argument is visible.",
-      lat:"duo modo haec opto, unum ut ... alterum ut ...", tr:"I wish for only these two things: one, that ... the other, that ...",
-      where:"Lines 8–11. <i>duo</i> announces the number; <i>unum</i> and <i>alterum</i> count them off; each has its own <i>ut</i>-clause.",
-      effect:"The numbered wishes give the ending the shape of a will. <i>modo</i>, 'only', makes the requests sound modest; the second request is then anything but. This is a formal peroration, the closing of a speech.",
-      write:"Cicero shapes his ending as a will with <i>duo modo haec opto, unum ... alterum</i>, 'I wish for only these two things: one ... the other': the numbering and the limiting word <i>modo</i> make the wishes sound modest and final, so that the threat hidden in the second wish arrives with the calm of a last request." },
-
-    { id:"parenthesis", cat:"order", name:"Parenthesis", aka:"an aside inside the sentence",
-      def:"A clause inserted into a sentence, interrupting it, usually marked by dashes.",
-      lat:"— hoc mihi maius ab dis immortalibus dari nihil potest —", tr:"— nothing greater than this can be granted to me by the immortal gods —",
-      where:"Lines 9–10, between the first wish and <i>alterum</i>.",
-      effect:"The interruption sounds spontaneous, as if the thought broke in while he spoke, and that is the point: the wish for a free Rome is made to seem the one thing he cannot say calmly. It also brings the gods into the sentence, so that a political hope becomes a prayer.",
-      write:"The parenthesis <i>hoc mihi maius ab dis immortalibus dari nihil potest</i>, 'nothing greater than this can be granted to me by the immortal gods', breaks into the sentence as if the thought could not wait: the interruption makes the wish for a free Rome sound like the one thing Cicero cannot say calmly, and the mention of the gods turns a political aim into a prayer." },
-
-    { id:"generality", cat:"word", name:"Pointed generality", aka:"saying 'everyone' and meaning one man",
-      def:"A statement phrased about everybody so that the audience supplies the particular person it is aimed at.",
-      lat:"ut ita cuique eveniat ut de re publica quisque mereatur", tr:"that it may turn out for each man as each deserves of the republic",
-      where:"Lines 10–11, the last words of the speech.",
-      effect:"The curse on Antony is delivered without his name, as a wish for justice, so that it cannot be called a threat; and every senator knows who has deserved ill of the republic. Ending on <i>re publica</i> leaves the state, not Cicero, as the final word.",
-      write:"Cicero closes on a general wish, <i>ut ita cuique eveniat ut de re publica quisque mereatur</i>, 'that it may turn out for each man as each deserves of the republic': the refusal to name anyone lets the senate supply Antony as the man who deserves ill, so that a curse is delivered in the form of a prayer and the speech ends on the words <i>re publica</i>." },
-
-    { id:"appeals", cat:"context", name:"The three appeals: ethos, pathos, logos", aka:"character, emotion, reason",
-      def:"Ancient rhetoric taught that a speaker persuades in three ways: by his character (ethos), by moving the audience's feelings (pathos), and by argument (logos). This passage uses all three in turn.",
-      lat:"defendi ... (ethos) · quin etiam corpus libenter obtulerim ... parturit! (pathos) · si ... quanto verius ...? (logos)", tr:"",
-      where:"Lines 1–2 build ethos from his record; lines 2–4 are the pathos of the exclamation; lines 4–6 are the logos of the 'how much more' argument; lines 6–11 return to ethos and end with a prayer.",
-      effect:"Knowing which appeal a sentence makes tells you what to say about its effect: a record makes him credible, an exclamation makes the senate feel, an argument makes them agree. Use the three words sparingly in the exam, and always with the Latin that shows them at work.",
-      write:"Cicero moves from ethos to pathos to logos: the record of <i>defendi rem publicam adulescens</i> makes him credible, the exclamation <i>quin etiam corpus libenter obtulerim</i> makes the senate feel his readiness to die, and the <i>si ... quanto verius</i> argument gives that feeling a reason, so that the offer of his life is believed, felt and accepted in turn." }
-  ],
-
-  /* =================================================================
-     GUIDANCE · the question types on a prose passage, from the Eduqas papers
-     ================================================================= */
-  guidance:{
-    title:"The questions you will face on this text, and how each is marked",
-    intro:"Section A of the paper sets short questions on one or two of the prescribed passages. On a prose passage like this one you can expect every type below. The rules come from the Eduqas mark schemes, the examiners' reports and the board's marking guidance; the twelve questions at the end of the passage give you at least one of each.",
-    items:[
-      { h:"Content questions (1–4 marks): facts from inside the line reference",
-        p:"One mark for each distinct fact taken from the lines named, in English. <i>Lines 1–2: what did Cicero do as a young man?</i> The examiners say every year that perceptive answers earn nothing because they use material from outside the lines. Put a finger on the first word and the last word of the reference before you write. Count the marks and give that many separate details." },
-      { h:"'Pick out and translate' (2 marks)",
-        p:"Copy the Latin word exactly as printed, then give its meaning. One mark for the word, one for the translation. <i>Pick out the Latin word which shows that Cicero is speaking to Antony</i>: <i>tuos</i>, 'yours'. If the word is a comparative or superlative, the second mark needs 'more' or '-est' in the English." },
-      { h:"Style questions (4, 6 or 8 marks): quote, translate, explain, link",
-        p:"Two marks per point, and the question tells you how many points (<i>make three points</i>). The formula is: <b>quote the Latin, translate it, say what Cicero does with it, link it to the terms of the question</b> ('forceful', 'memorable', 'moving'). Naming a device is not required and earns nothing by itself; 'this emphasises his courage' with no Latin earns nothing either. A point with Latin and a technique but no effect gets one mark at most. Stay inside the lines named. This is where the Toolkit earns its keep: every device there comes with a model sentence in this shape." },
-      { h:"Impression and judgement questions (2–3 marks)",
-        p:"<i>What impression ...? What do you think Cicero really means ...? How far do you agree ...?</i> These are evaluation (AO3). Give the impression or verdict, then the reason, and tie the reason to the lines named. A fact alone gains nothing; the explanation earns the mark. One well-explained reason beats three vague ones." },
-      { h:"The 16-mark essay",
-        p:"You must refer to at least <b>four</b> of the texts and pictures in the Resource Booklet, or you cannot get above Band 3 for knowledge. Latin quotation is out of place in the essay and earns nothing: refer to details in English. Every example must be linked to the question, and a counter-argument helps. Cicero is your best example of a hero who is heroic in words: use him against Horatius (deeds), with Augustus (the gods' favourite), and against Sejanus and Mezentius (the villains who put themselves first)." },
-      { h:"In this booklet",
-        p:"Each note you open names the devices in that phrase and gives three model sentences: one for a style question, one for a content or impression question, one for the essay. They show the shape; do not learn them by heart. Write your own answer first, press <i>Reveal</i>, compare, mark yourself. Your answers and marks are saved for your teacher." }
-    ]
+ "id": "HVC1",
+ "book": "hvvivek27-c1",
+ "num": 2,
+ "docTitle": "Heroes C1 (Vivek)",
+ "bookno": "BOOKLET C1 · VIVEK",
+ "series": "Eduqas GCSE Latin · Component 2 · Heroes and Villains (2027–29)",
+ "title": "Cicero: the orator as hero",
+ "subtitle": "<i>Philippic</i> 2.118–119",
+ "strap": "Cicero, <i>Philippic</i> 2.118–119 · the last paragraph of a speech that was never delivered · November 44 BC",
+ "gateLine": "One old man tells the senate he would rather die than see Rome unfree. Every sentence is built to be believed.",
+ "firstBooklet": false,
+ "howText": "One passage, set out with the Latin on the left and a translation on the right. The coloured phrases in the Latin are the places where a question can be asked. Tap one and a panel opens with the Latin and its translation, a <b>My notes</b> box and three questions. Your teacher will talk you through each phrase: write down what he explains in <b>My notes</b>. Then answer the three questions yourself, in full sentences: a <b>style point</b> (quote the Latin, translate it, say what Cicero has done, link it to the question), a <b>content</b> answer in English, and one <b>essay sentence</b> that uses the point as evidence. A phrase gets a tick once all three are written. The <b>Toolkit</b> tab names the devices you need to recognise and shows where each happens; write your own notes and your own exam sentence for each. At the end of the passage there are twelve exam-style questions; the <b>Practice</b> tab adds three further sets; <b>Together</b> has a 16-mark essay paragraph. For those, answer, press <b>Reveal</b>, and mark yourself. Everything saves to the class store and follows you to any device.",
+ "ragText": "How confident do you feel about this passage?",
+ "themeNote": "The specification's first idea is <b>the characteristics of a Roman hero</b>, and the Resource Booklet lists Cicero as one of its three heroes, alongside Horatius on the bridge and Augustus at Actium. He is the odd one out: no sword, no river, no battle. His heroism is a claim made in words, and the examiner's questions on this text are nearly all about <i>how the words are made to work</i>. So the skill this booklet builds is recognition: seeing the antithesis, the metaphor, the rhetorical question, the word placed last for emphasis, and then saying what each one does for Cicero's case. Keep the standard formula in view throughout: <b>quote the Latin, translate it, say what Cicero does with it, link it to the question</b>. Naming a device earns nothing on its own; a device named, quoted and explained earns two marks every time.",
+ "toolkit": [
+  {
+   "id": "antithesis",
+   "cat": "structure",
+   "name": "Antithesis",
+   "aka": "contrast, opposition",
+   "def": "Two ideas set against each other in matching positions, so that the contrast does the arguing.",
+   "lat": "defendi rem publicam adulescens, non deseram senex",
+   "tr": "I defended the republic as a young man; I shall not desert it as an old one",
+   "where": "Line 1. Perfect <i>defendi</i> against future <i>deseram</i>; <i>adulescens</i> against <i>senex</i>; 'defended' against 'desert'."
   },
-
-  passages: [
-  /* =================================================================
-     PASSAGE · Cicero, Philippic 2.118–119
-     ================================================================= */
-  { id:"cic", short:"The text", author:"Cicero", work:"<i>Philippic</i> 2.118–119", lines:"lines 1–11",
-    heading:"A politician recalls his own bravery",
-    intro:"November 44 BC, eight months after the murder of Julius Caesar. Mark Antony, Caesar's deputy, is the most powerful man in Rome and, in Cicero's eyes, the next tyrant. Cicero, now sixty-two, is writing the second of fourteen speeches against him, the <i>Philippics</i>, named after Demosthenes' speeches against Philip of Macedon. The Second Philippic was never delivered: it was circulated as a pamphlet, written as if spoken in the senate on 19 September, in reply to Antony's attack on him. This extract is its last paragraph. Cicero reminds the senate that he saved the republic from Catiline as consul in 63 BC, says he is ready to die for it now, and ends with a wish that sounds like a threat. A year later Antony had him killed. The Resource Booklet lists Cicero as one of its three heroes; the villain of his text is Antony.",
-    facts:[
-      ["Cicero","Marcus Tullius Cicero, 106–43 BC, born at Arpinum, a 'new man' with no consular ancestors; consul in 63 BC, when he crushed Catiline's conspiracy and was hailed <i>pater patriae</i>, father of the country; the greatest orator of Rome; killed on Antony's orders on 7 December 43 BC, his head and hands displayed on the Rostra in the Forum"],
-      ["Antony","Marcus Antonius, Caesar's second-in-command and consul in 44 BC; after Caesar's murder on 15 March he took control of Rome; Cicero attacked him in fourteen <i>Philippics</i> between September 44 and April 43 BC; the Second Philippic answers Antony's speech of 19 September 44, which accused Cicero of plotting Caesar's death"],
-      ["The Philippics","Named after the speeches of the Athenian orator Demosthenes against Philip II of Macedon in the 340s BC; the Second is the longest and most savage, and was circulated as a pamphlet rather than spoken"],
-      ["'Nearly twenty years ago in this very temple'","The temple of Concord at the west end of the Forum, where the senate met on 5 December 63 BC and Cicero delivered the Fourth Catilinarian; there he said that death could not be untimely for a man who had been consul"],
-      ["Catiline","Lucius Sergius Catilina, an aristocrat who plotted a coup in 63 BC after losing the consular elections; Cicero exposed him in the senate, had five of the conspirators executed without trial, and Catiline died in battle at Pistoria in January 62 BC; the Maccari painting in the Resource Booklet shows Cicero denouncing him"],
-      ["What Cicero means by 'the republic'","<i>res publica</i>, the rule of the senate and magistrates that had run Rome since the kings were expelled in 509 BC; whenever Cicero says <i>res publica</i> he means the senate's authority against any one man"],
-      ["What Cicero means by 'free'","<i>libertas</i> was the republican watchword: freedom from a king, a dictator or a tyrant; after Caesar it meant freedom from Antony, and the word is the hinge of this passage"],
-      ["What happened next","Antony left Rome in November 44; in 43 Cicero led the senate against him; Antony joined Octavian and Lepidus in the triumvirate, and Cicero's name headed the list of men to be killed; he was caught at Formiae on 7 December 43 BC"]
+  {
+   "id": "asyndeton",
+   "cat": "structure",
+   "name": "Asyndeton",
+   "aka": "leaving out connectives",
+   "def": "Clauses or words placed side by side with no 'and', 'but' or 'for' between them.",
+   "lat": "defendi ... senex: contempsi ... tuos",
+   "tr": "I defended ... old one: I scorned ... yours",
+   "where": "Lines 1–2. Four clauses, no connective at all; the colon marks the join."
+  },
+  {
+   "id": "parallelism",
+   "cat": "structure",
+   "name": "Parallelism",
+   "aka": "balance, isocolon, balanced clauses",
+   "def": "Two phrases or clauses built to the same pattern, word for word, so that the second echoes the first.",
+   "lat": "contempsi Catilinae gladios, non pertimescam tuos",
+   "tr": "I scorned the swords of Catiline; I shall not be terrified of yours",
+   "where": "Lines 1–2. The second sentence copies the first exactly: perfect verb, then <i>non</i> + future verb; a named enemy, then <i>tuos</i>."
+  },
+  {
+   "id": "anaphora",
+   "cat": "sound",
+   "name": "Anaphora and repetition",
+   "aka": "repeated word at the start of successive clauses",
+   "def": "The same word or phrase repeated at the beginning of successive clauses (anaphora), or repeated for emphasis anywhere.",
+   "lat": "non deseram ... non pertimescam",
+   "tr": "I shall not desert ... I shall not be terrified",
+   "where": "Lines 1–2. <i>non</i> opens both second halves; <i>negavi ... negabo</i> (lines 5–6) and <i>unum ... alterum</i> (lines 8–10) are further patterned repetitions."
+  },
+  {
+   "id": "tense",
+   "cat": "structure",
+   "name": "Tense contrast",
+   "aka": "past against future",
+   "def": "A perfect verb set beside a future verb so that what was done guarantees what will be done.",
+   "lat": "defendi ... deseram; contempsi ... pertimescam; negavi ... negabo",
+   "tr": "I defended ... I shall desert; I scorned ... I shall fear; I said ... I shall say",
+   "where": "Lines 1–2 and 5–6. Three times in six lines."
+  },
+  {
+   "id": "apostrophe",
+   "cat": "order",
+   "name": "Apostrophe and direct address",
+   "aka": "turning to address someone",
+   "def": "Speaking directly to a person who is not the main audience, or addressing the audience by a formal title.",
+   "lat": "non pertimescam tuos ... patres conscripti",
+   "tr": "I shall not be terrified of yours ... senators",
+   "where": "Line 2 (<i>tuos</i>, to Antony, who is not present); line 7 (<i>patres conscripti</i>, 'conscript fathers', the formal address to the senate)."
+  },
+  {
+   "id": "metonymy",
+   "cat": "word",
+   "name": "Metonymy",
+   "aka": "the part or the symbol for the thing",
+   "def": "Naming one thing by something closely associated with it: the swords for the violence, the body for the life.",
+   "lat": "Catilinae gladios ... corpus",
+   "tr": "the swords of Catiline ... my body",
+   "where": "Line 2 (<i>gladios</i>, 'swords', for Catiline's whole armed threat); line 2 (<i>corpus</i>, 'body', for his life)."
+  },
+  {
+   "id": "climax",
+   "cat": "structure",
+   "name": "Climax and escalation",
+   "aka": "going one step further",
+   "def": "A series in which each step raises the stakes, often signalled by 'indeed', 'even', 'what is more'.",
+   "lat": "quin etiam ... iam etiam optanda mors est",
+   "tr": "Indeed, even ... now death is even something to be wished for",
+   "where": "Line 2 (<i>quin etiam</i>, 'indeed, even', raising defiance to self-sacrifice); line 7 (<i>iam etiam</i>, 'now even', raising not fearing death to wanting it)."
+  },
+  {
+   "id": "position",
+   "cat": "order",
+   "name": "Emphatic word position",
+   "aka": "word order, placing a word first or last, hyperbaton",
+   "def": "Latin word order is free, so a word put first, last, or out of its expected place carries emphasis. Hyperbaton is the separation of words that belong together.",
+   "lat": "corpus libenter obtulerim ... populum Romanum liberum relinquam",
+   "tr": "my body gladly I would offer ... the Roman people free I would leave",
+   "where": "Lines 2–3 (<i>libenter</i> wedged between <i>corpus</i> and <i>obtulerim</i>); line 9 (<i>liberum</i> placed before the verb, as the last thing said of the Roman people); line 9 (<i>hoc mihi maius ... nihil potest</i>, with <i>nihil</i> held back to the end)."
+  },
+  {
+   "id": "alliteration",
+   "cat": "sound",
+   "name": "Alliteration",
+   "aka": "repeated initial sound",
+   "def": "The same consonant sound beginning neighbouring words.",
+   "lat": "morte mea ... populi ... pariat ... parturit ... mihi maius",
+   "tr": "by my death ... of the people ... may give birth ... has been in labour ... to me greater",
+   "where": "Line 3 (<i>m</i>: <i>morte mea</i>); lines 3–4 (<i>p</i>: <i>populi ... pariat ... parturit</i>); line 9 (<i>m</i>: <i>mihi maius</i>). The <i>m</i> sound runs through the whole passage: <i>mortem immaturam ... mihi ... mors ... moriens</i>."
+  },
+  {
+   "id": "metaphor",
+   "cat": "word",
+   "name": "Metaphor",
+   "aka": "image, figurative language",
+   "def": "Describing one thing in the language of another: here money and childbirth.",
+   "lat": "repraesentari morte mea libertas ... dolor populi Romani pariat quod iam diu parturit",
+   "tr": "freedom paid for at once by my death ... the anguish of the Roman people may give birth to what it has long been in labour with",
+   "where": "Line 3 (<i>repraesentari</i>, a commercial word, 'to pay in cash', 'to realise immediately'); lines 3–4 (<i>pariat ... parturit</i>, the state's suffering as a pregnancy)."
+  },
+  {
+   "id": "personification",
+   "cat": "word",
+   "name": "Personification",
+   "aka": "giving a thing human action",
+   "def": "An abstract noun or a thing made to act like a person.",
+   "lat": "dolor populi Romani pariat",
+   "tr": "the anguish of the Roman people may give birth",
+   "where": "Lines 3–4. <i>dolor</i>, 'anguish', is the subject of <i>pariat</i>, 'may give birth'."
+  },
+  {
+   "id": "polyptoton",
+   "cat": "sound",
+   "name": "Polyptoton",
+   "aka": "the same root in different forms",
+   "def": "Two or more words from the same root in different grammatical forms close together.",
+   "lat": "pariat ... parturit; cuique ... quisque",
+   "tr": "may give birth ... has been in labour; to each ... each",
+   "where": "Lines 3–4 (<i>pariat / parturit</i>, both from the root of giving birth); lines 10–11 (<i>cuique / quisque</i>, 'each')."
+  },
+  {
+   "id": "exclamation",
+   "cat": "sound",
+   "name": "Exclamation",
+   "aka": "exclamatio",
+   "def": "A sentence spoken with raised feeling, marked in a modern text by an exclamation mark.",
+   "lat": "quin etiam corpus libenter obtulerim ... parturit!",
+   "tr": "Indeed, I would gladly offer my body ... labouring to deliver!",
+   "where": "Lines 2–4. The whole sentence of self-sacrifice is an exclamation."
+  },
+  {
+   "id": "rhetq",
+   "cat": "structure",
+   "name": "Rhetorical question",
+   "aka": "a question with only one possible answer",
+   "def": "A question asked for effect, where the listener is made to supply the obvious answer.",
+   "lat": "quanto verius nunc negabo seni?",
+   "tr": "how much more truly shall I now say it for an old man?",
+   "where": "Line 6."
+  },
+  {
+   "id": "afortiori",
+   "cat": "structure",
+   "name": "Argument from the stronger case",
+   "aka": "a fortiori, 'how much more'",
+   "def": "If something was true in a weaker case, it must be true in a stronger one.",
+   "lat": "si ... negavi posse mortem immaturam esse consulari, quanto verius nunc negabo seni?",
+   "tr": "if I said that death could not be untimely for a man who had been consul, how much more truly shall I now say it for an old man?",
+   "where": "Lines 4–6. The <i>si</i>-clause gives the weaker case (a consul of 43), <i>quanto verius</i> gives the stronger (an old man of 62)."
+  },
+  {
+   "id": "deixis",
+   "cat": "context",
+   "name": "Deixis",
+   "aka": "pointing words: this, here, now",
+   "def": "Words that point to the speaker's own place and time, as if the speech were happening live.",
+   "lat": "hoc ipso in templo ... nunc",
+   "tr": "in this very temple ... now",
+   "where": "Lines 5 and 6. <i>hoc ipso</i>, 'this very', points at the temple of Concord; <i>nunc</i> at the present moment."
+  },
+  {
+   "id": "selfref",
+   "cat": "context",
+   "name": "Self-reference and ethos",
+   "aka": "the speaker's own record as evidence",
+   "def": "The speaker builds his authority (ethos) by reminding the audience of who he is and what he has done.",
+   "lat": "negavi ... negabo; perfuncto rebus eis quas adeptus sum quasque gessi",
+   "tr": "I said ... I shall say; having completed the things I attained and the things I achieved",
+   "where": "Lines 5–6 (quoting his own Fourth Catilinarian); lines 7–8 (the summary of his honours and deeds). Note how many verbs are first person: <i>defendi, deseram, contempsi, pertimescam, obtulerim, negavi, negabo, opto, relinquam</i>."
+  },
+  {
+   "id": "gerundive",
+   "cat": "word",
+   "name": "The gerundive of obligation",
+   "aka": "'is to be ...', 'must be ...'",
+   "def": "The -ndus form with <i>est</i>, meaning something 'must be' or 'is to be' done; the person who must do it goes in the dative.",
+   "lat": "mihi ... optanda mors est",
+   "tr": "for me death is to be wished for",
+   "where": "Lines 6–7. <i>optanda</i> agrees with <i>mors</i>; <i>mihi</i> is the dative of agent."
+  },
+  {
+   "id": "enumeration",
+   "cat": "structure",
+   "name": "Enumeration",
+   "aka": "numbered points, 'one ... the other'",
+   "def": "Listing points by number so that the structure of the argument is visible.",
+   "lat": "duo modo haec opto, unum ut ... alterum ut ...",
+   "tr": "I wish for only these two things: one, that ... the other, that ...",
+   "where": "Lines 8–11. <i>duo</i> announces the number; <i>unum</i> and <i>alterum</i> count them off; each has its own <i>ut</i>-clause."
+  },
+  {
+   "id": "parenthesis",
+   "cat": "order",
+   "name": "Parenthesis",
+   "aka": "an aside inside the sentence",
+   "def": "A clause inserted into a sentence, interrupting it, usually marked by dashes.",
+   "lat": "— hoc mihi maius ab dis immortalibus dari nihil potest —",
+   "tr": "— nothing greater than this can be granted to me by the immortal gods —",
+   "where": "Lines 9–10, between the first wish and <i>alterum</i>."
+  },
+  {
+   "id": "generality",
+   "cat": "word",
+   "name": "Pointed generality",
+   "aka": "saying 'everyone' and meaning one man",
+   "def": "A statement phrased about everybody so that the audience supplies the particular person it is aimed at.",
+   "lat": "ut ita cuique eveniat ut de re publica quisque mereatur",
+   "tr": "that it may turn out for each man as each deserves of the republic",
+   "where": "Lines 10–11, the last words of the speech."
+  },
+  {
+   "id": "appeals",
+   "cat": "context",
+   "name": "The three appeals: ethos, pathos, logos",
+   "aka": "character, emotion, reason",
+   "def": "Ancient rhetoric taught that a speaker persuades in three ways: by his character (ethos), by moving the audience's feelings (pathos), and by argument (logos). This passage uses all three in turn.",
+   "lat": "defendi ... (ethos) · quin etiam corpus libenter obtulerim ... parturit! (pathos) · si ... quanto verius ...? (logos)",
+   "tr": "",
+   "where": "Lines 1–2 build ethos from his record; lines 2–4 are the pathos of the exclamation; lines 4–6 are the logos of the 'how much more' argument; lines 6–11 return to ethos and end with a prayer."
+  }
+ ],
+ "guidance": {
+  "title": "The questions you will face on this text, and how each is marked",
+  "intro": "Section A of the paper sets short questions on one or two of the prescribed passages. On a prose passage like this one you can expect every type below. The rules come from the Eduqas mark schemes, the examiners' reports and the board's marking guidance; the twelve questions at the end of the passage give you at least one of each.",
+  "items": [
+   {
+    "h": "Content questions (1–4 marks): facts from inside the line reference",
+    "p": "One mark for each distinct fact taken from the lines named, in English. <i>Lines 1–2: what did Cicero do as a young man?</i> The examiners say every year that perceptive answers earn nothing because they use material from outside the lines. Put a finger on the first word and the last word of the reference before you write. Count the marks and give that many separate details."
+   },
+   {
+    "h": "'Pick out and translate' (2 marks)",
+    "p": "Copy the Latin word exactly as printed, then give its meaning. One mark for the word, one for the translation. <i>Pick out the Latin word which shows that Cicero is speaking to Antony</i>: <i>tuos</i>, 'yours'. If the word is a comparative or superlative, the second mark needs 'more' or '-est' in the English."
+   },
+   {
+    "h": "Style questions (4, 6 or 8 marks): quote, translate, explain, link",
+    "p": "Two marks per point, and the question tells you how many points (<i>make three points</i>). The formula is: <b>quote the Latin, translate it, say what Cicero does with it, link it to the terms of the question</b> ('forceful', 'memorable', 'moving'). Naming a device is not required and earns nothing by itself; 'this emphasises his courage' with no Latin earns nothing either. A point with Latin and a technique but no effect gets one mark at most. Stay inside the lines named. This is where the Toolkit earns its keep: every device there comes with a model sentence in this shape."
+   },
+   {
+    "h": "Impression and judgement questions (2–3 marks)",
+    "p": "<i>What impression ...? What do you think Cicero really means ...? How far do you agree ...?</i> These are evaluation (AO3). Give the impression or verdict, then the reason, and tie the reason to the lines named. A fact alone gains nothing; the explanation earns the mark. One well-explained reason beats three vague ones."
+   },
+   {
+    "h": "The 16-mark essay",
+    "p": "You must refer to at least <b>four</b> of the texts and pictures in the Resource Booklet, or you cannot get above Band 3 for knowledge. Latin quotation is out of place in the essay and earns nothing: refer to details in English. Every example must be linked to the question, and a counter-argument helps. Cicero is your best example of a hero who is heroic in words: use him against Horatius (deeds), with Augustus (the gods' favourite), and against Sejanus and Mezentius (the villains who put themselves first)."
+   },
+   {
+    "h": "In this booklet",
+    "p": "Each note you open names the devices in that phrase and gives three model sentences: one for a style question, one for a content or impression question, one for the essay. They show the shape; do not learn them by heart. Write your own answer first, press <i>Reveal</i>, compare, mark yourself. Your answers and marks are saved for your teacher."
+   }
+  ]
+ },
+ "passages": [
+  {
+   "id": "cic",
+   "short": "The text",
+   "author": "Cicero",
+   "work": "<i>Philippic</i> 2.118–119",
+   "lines": "lines 1–11",
+   "heading": "A politician recalls his own bravery",
+   "intro": "November 44 BC, eight months after the murder of Julius Caesar. Mark Antony, Caesar's deputy, is the most powerful man in Rome and, in Cicero's eyes, the next tyrant. Cicero, now sixty-two, is writing the second of fourteen speeches against him, the <i>Philippics</i>, named after Demosthenes' speeches against Philip of Macedon. The Second Philippic was never delivered: it was circulated as a pamphlet, written as if spoken in the senate on 19 September, in reply to Antony's attack on him. This extract is its last paragraph. Cicero reminds the senate that he saved the republic from Catiline as consul in 63 BC, says he is ready to die for it now, and ends with a wish that sounds like a threat. A year later Antony had him killed. The Resource Booklet lists Cicero as one of its three heroes; the villain of his text is Antony.",
+   "facts": [
+    [
+     "Cicero",
+     "Marcus Tullius Cicero, 106–43 BC, born at Arpinum, a 'new man' with no consular ancestors; consul in 63 BC, when he crushed Catiline's conspiracy and was hailed <i>pater patriae</i>, father of the country; the greatest orator of Rome; killed on Antony's orders on 7 December 43 BC, his head and hands displayed on the Rostra in the Forum"
     ],
-    rows:[
-      { ln:"1–2", lat:"[[ca|defendi rem publicam adulescens, non deseram senex]]: [[cb|contempsi / Catilinae gladios]], [[cc|non pertimescam tuos]].",
-        en:"I defended the republic as a young man; I shall not desert it as an old one. I scorned the swords of Catiline; I shall not be terrified of yours." },
-      { ln:"2–4", lat:"[[cd|quin etiam corpus libenter / obtulerim]], [[ce|si repraesentari morte mea libertas civitatis potest]], [[cf|ut / aliquando dolor populi Romani pariat quod iam diu parturit]]!",
-        en:"Indeed, I would gladly offer my body, if by my death the freedom of the state can be brought about at once, so that at last the anguish of the Roman people may give birth to what it has long been labouring to deliver!" },
-      { ln:"4–6", lat:"etenim si / [[cg|abhinc annos prope viginti hoc ipso in templo]] [[ch|negavi posse mortem / immaturam esse consulari]], [[ci|quanto verius nunc negabo seni]]?",
-        en:"For if nearly twenty years ago, in this very temple, I said that death could not be untimely for a man who had been consul, how much more truly shall I now say it for an old man?" },
-      { ln:"6–8", lat:"[[cj|mihi / vero, patres conscripti, iam etiam optanda mors est]], [[ck|perfuncto rebus / eis quas adeptus sum quasque gessi]].",
-        en:"For me, senators, death is now even something to be wished for, since I have completed the things I attained and the things I achieved." },
-      { ln:"8–11", lat:"[[cl|duo modo haec opto, unum]] ut / [[cm|moriens populum Romanum liberum relinquam]] — [[cn|hoc mihi maius ab / dis immortalibus dari nihil potest]] — alterum [[co|ut ita cuique eveniat ut / de re publica quisque mereatur]].",
-        en:"I wish for only these two things: one, that in dying I may leave the Roman people free — nothing greater than this can be granted to me by the immortal gods — the other, that it may turn out for each man as each deserves of the republic." }
+    [
+     "Antony",
+     "Marcus Antonius, Caesar's second-in-command and consul in 44 BC; after Caesar's murder on 15 March he took control of Rome; Cicero attacked him in fourteen <i>Philippics</i> between September 44 and April 43 BC; the Second Philippic answers Antony's speech of 19 September 44, which accused Cicero of plotting Caesar's death"
     ],
-    notes:{
-      ca:{ cat:"structure", tag:"Young man, old man", devices:["Antithesis","Asyndeton","Tense contrast","Ethos"],
-        tr:"I defended the republic as a young man; I shall not desert it as an old one",
-        what:"Two balanced clauses with no connective (asyndeton): perfect <i>defendi</i> against future <i>deseram</i>, <i>adulescens</i> against <i>senex</i>, 'defended' against 'desert' (the verbs even share their first letter). Cicero was 43 in 63 BC, well past the usual limit of <i>adulescentia</i>, so <i>adulescens</i> is chosen for the contrast, not the truth. <i>rem publicam</i> is understood again as the object of <i>deseram</i>.",
-        effect:"A whole career is compressed into one line and offered as proof of character: the man who defended the republic then is the same man now. The senate is asked to trust a record, and the shape of the sentence makes the record sound like a fact. This is ethos: believe me because of who I have been.",
-        ex:{ style:"Cicero opens with a balanced antithesis, <i>defendi rem publicam adulescens, non deseram senex</i>, 'I defended the republic as a young man; I shall not desert it as an old one': the perfect and future verbs and the pair <i>adulescens ... senex</i> compress his career into a single claim of consistency, and the asyndeton makes it sound like a fact rather than an argument.",
-             content:"Cicero says that he defended the republic as a young man (as consul in 63 BC) and will not abandon it now that he is old.",
-             essay:"Cicero presents his own heroism as consistency: the man who defended the republic against Catiline as a young consul will not desert it as an old man, so that courage is a lifelong record rather than one deed." } },
-      cb:{ cat:"word", tag:"The swords of Catiline", devices:["Metonymy","Tense contrast","Ethos"],
-        tr:"I scorned the swords of Catiline",
-        what:"<i>gladios</i>, 'swords', stands for the whole armed conspiracy of 63 BC (metonymy); Catiline really did send men to kill Cicero at his house. <i>contempsi</i>, 'I scorned, I despised', is stronger than 'I survived': it claims contempt, not luck. Catiline is named; the next clause will not name Antony.",
-        effect:"The senate is made to see steel, and to remember that Cicero faced it once and treated it with contempt. A concrete noun does what 'danger' could not. The named enemy also sets up the comparison: whoever fills the matching slot in the next clause is the new Catiline.",
-        ex:{ style:"<i>contempsi Catilinae gladios</i>, 'I scorned the swords of Catiline', makes the threat of 63 BC physical: the metonymy of swords for the conspiracy's violence lets the senate picture the steel Cicero faced, and the verb <i>contempsi</i> claims not survival but contempt, the attitude of a man who did not fear.",
-             content:"Cicero says that he despised (scorned) the swords, that is the violent threats, of Catiline.",
-             essay:"Cicero reminds the senate that he scorned Catiline's swords in 63 BC, so that his heroism, like Horatius', is a matter of facing steel; the difference is that Cicero's weapon was a speech." } },
-      cc:{ cat:"order", tag:"I shall not fear yours", devices:["Parallelism","Apostrophe","Anaphora","Implied comparison"],
-        tr:"I shall not be terrified of yours",
-        what:"The clause exactly mirrors the one before: perfect against future, a named enemy against <i>tuos</i>, 'yours', with <i>gladios</i> understood. <i>tuos</i> is addressed directly to Antony as if he were present (apostrophe); the <i>non</i> repeats the <i>non</i> of <i>non deseram</i>. <i>pertimescam</i>, 'be thoroughly frightened', is a strong verb, chosen to be denied.",
-        effect:"Antony is put in Catiline's place without being named: the parallel does the accusing. The direct address turns a pamphlet into a confrontation, and the senate watches Cicero face his enemy rather than describe him. The reader hears defiance and a warning at once: the swords are real, and he does not care.",
-        ex:{ style:"Cicero completes the parallel with <i>non pertimescam tuos</i>, 'I shall not be terrified of yours': Antony, addressed directly as <i>tuos</i> though he is not present, is placed in the exact position of the traitor Catiline, so that the structure condemns him without a name, and the perfect against the future makes the old victory a promise of the new one.",
-             content:"Cicero says he will not be afraid of Antony's swords (threats of violence) either.",
-             essay:"Cicero makes himself the hero by making Antony the new Catiline: the swords he scorned in 63 BC and the swords he refuses to fear in 44 BC are set in parallel, and the reader is meant to see one villain succeeding another with the same man standing against both." } },
-      cd:{ cat:"order", tag:"I would gladly offer my body", devices:["Climax (quin etiam)","Emphatic word position","Metonymy","Exclamation","Pathos"],
-        tr:"Indeed, I would gladly offer my body",
-        what:"<i>quin etiam</i>, 'indeed, even', signals a step up: from not fearing to offering his life. <i>obtulerim</i> is a perfect subjunctive, potential in sense, 'I would offer'; <i>corpus</i>, 'body', is the physical, mortal noun for his life (metonymy). <i>libenter</i>, 'gladly', is wedged between <i>corpus</i> and its verb, separating the words that belong together so that the adverb is the one the ear catches. The whole sentence to <i>parturit</i> is an exclamation.",
-        effect:"The climax of the opening: defiance becomes self-sacrifice, and the sacrifice is welcomed, not endured. The orator claims for himself the language of the soldier on the bridge. Whether the senate believes him is the question; the sentence is built so that they feel it before they judge it.",
-        ex:{ style:"With <i>quin etiam corpus libenter obtulerim</i>, 'indeed, I would gladly offer my body', Cicero moves to a climax: <i>quin etiam</i> signposts the step from defiance to sacrifice, and <i>libenter</i>, placed between <i>corpus</i> and <i>obtulerim</i>, is the word the senate hears, so that his death is presented as a willing offering rather than a risk.",
-             content:"Cicero says he would willingly offer his body (give up his life) for the freedom of the state.",
-             essay:"Cicero offers his body 'gladly' for the freedom of the state, borrowing the soldier's language of physical sacrifice, so that a speech becomes a heroic act; whether the reader believes him is the question the essay has to decide." } },
-      ce:{ cat:"word", tag:"Freedom bought by my death", devices:["Metaphor (commercial)","Alliteration","Key word: libertas"],
-        tr:"if by my death the freedom of the state can be brought about at once",
-        what:"<i>repraesentari</i> is a business word, 'to pay in cash, to realise immediately': freedom would be bought outright, now, by his death. <i>morte mea</i> alliterates on <i>m</i>, stressing whose death. <i>libertas civitatis</i>, 'the freedom of the state', is the republican watchword and the value Cicero claims to serve. The condition is open: <i>si ... potest</i>, 'if it can'.",
-        effect:"The commercial metaphor makes the exchange sound like a bargain: one old man's life for a free Rome, paid at once. <i>libertas</i> attaches the republican slogan to Cicero's own death as its price, and the alliteration makes the senate hear that the price is his. The reader is invited to think that Cicero, unlike Antony, would pay.",
-        ex:{ style:"Cicero puts his death in the language of a transaction, <i>si repraesentari morte mea libertas civitatis potest</i>, 'if by my death the freedom of the state can be brought about at once': the verb <i>repraesentari</i>, to pay in ready money, makes his life the price of Rome's <i>libertas</i>, and the alliteration of <i>morte mea</i> stresses whose death it would be.",
-             content:"Cicero says he would die if his death could immediately secure (bring about) the freedom of the state.",
-             essay:"Cicero attaches the republican word <i>libertas</i> to his own possible death, presenting himself as the man whose life would buy Rome's freedom, which is the same equation Horatius makes on the bridge and Propertius' Augustus at Actium." } },
-      cf:{ cat:"sound", tag:"The long labour of the Roman people", devices:["Metaphor (childbirth)","Personification","Polyptoton","Alliteration","Exclamation"],
-        tr:"so that at last the anguish of the Roman people may give birth to what it has long been labouring to deliver",
-        what:"<i>dolor</i>, 'anguish', is the subject of <i>pariat</i>, 'may give birth' (personification); <i>parturit</i>, 'has been in labour', is from the same root (polyptoton), and the two forms give the process and its end. <i>aliquando</i>, 'at last', and <i>iam diu</i>, 'for a long time now', stretch the labour out. The <i>p</i> sounds of <i>populi ... pariat ... parturit</i> give the clause a pushing rhythm, and the exclamation mark closes the raised voice that began at <i>quin etiam</i>.",
-        effect:"Rome's suffering is made purposeful: a labour that must end in something new, with Cicero's death as the moment of delivery. The feminine image of childbirth in a speech about swords and death is deliberately startling, and it makes the Roman people a single body that wants to be rid of Antony. This is the passage's emotional peak.",
-        ex:{ style:"Cicero turns the state's suffering into a pregnancy in <i>ut aliquando dolor populi Romani pariat quod iam diu parturit</i>, 'so that at last the anguish of the Roman people may give birth to what it has long been labouring to deliver': the polyptoton <i>pariat ... parturit</i> keeps the physical sense of childbirth alive, so that his own death becomes the act that ends a long labour and brings something new into being.",
-             content:"Cicero hopes that his death would allow the Roman people's long-felt anguish finally to produce the result (action against Antony, the recovery of freedom) that it has long been working towards.",
-             essay:"Cicero imagines Rome's suffering as a labour that his death would bring to birth: the hero is not the man who kills the enemy but the man whose sacrifice lets the people act, which makes his heroism a matter of example rather than force." } },
-      cg:{ cat:"context", tag:"In this very temple", devices:["Deixis","Appeal to memory","Ethos"],
-        tr:"nearly twenty years ago, in this very temple",
-        what:"<i>abhinc annos prope viginti</i>: 63 BC, nineteen years before. <i>hoc ipso in templo</i>: the temple of Concord at the west end of the Forum, where the senate often met and where, on 5 December 63, Cicero delivered his Fourth Catilinarian, saying almost these words about death not being untimely for an ex-consul. <i>ipso</i>, 'this very', points at the building, although the speech was never actually delivered there.",
-        effect:"Cicero makes the room itself his witness: the same temple, the same speaker, the same enemy in a new form. The pointing word gives a pamphlet the feel of a live speech, and reminds the senate of the day they last followed his lead and saved the republic.",
-        ex:{ style:"Cicero calls the building to witness with <i>abhinc annos prope viginti hoc ipso in templo</i>, 'nearly twenty years ago, in this very temple': the pointing word <i>ipso</i> places the senators in the temple of Concord where they had followed him against Catiline in 63 BC, so that the setting itself argues that they should follow him again.",
-             content:"Nearly twenty years earlier (in 63 BC), in the same temple (of Concord) where the senate is meeting, Cicero had spoken about death.",
-             essay:"Cicero's heroism is built on a remembered scene: 'this very temple' where the senate heard him against Catiline in 63 BC, so that his present defiance of Antony is presented as the same act repeated in the same room." } },
-      ch:{ cat:"context", tag:"What I said as consul", devices:["Self-quotation","Ethos","Tense contrast (negavi / negabo)"],
-        tr:"I said that death could not be untimely for a man who had been consul",
-        what:"<i>negavi posse mortem immaturam esse consulari</i>: 'I denied that death could be premature for an ex-consul', an indirect statement after <i>negavi</i>. This is a real quotation of himself: in the Fourth Catilinarian (4.3) Cicero said that for a man who had been consul death could be neither untimely nor wretched. <i>consulari</i> is dative, 'for a consular', a man of consular rank.",
-        effect:"Cicero quotes Cicero. His own past words become the evidence for his present courage, and the senate is reminded that he was right last time. The perfect <i>negavi</i> will be answered by the future <i>negabo</i> in the next clause: what he said then, he will say now.",
-        ex:{ style:"Cicero quotes his own words of 63 BC, <i>negavi posse mortem immaturam esse consulari</i>, 'I said that death could not be untimely for a man who had been consul': by making his younger self the authority, he turns a boast into a precedent, and the perfect <i>negavi</i> prepares the future <i>negabo</i>, so that consistency across twenty years is the proof of his sincerity.",
-             content:"Cicero had said that death could not be untimely (premature) for a man who had been consul.",
-             essay:"Cicero grounds his readiness to die in a precedent of his own making, the speech of 63 BC in which he said death could not be untimely for an ex-consul, so that his heroism is a matter of keeping faith with his own past." } },
-      ci:{ cat:"structure", tag:"The argument from more to less", devices:["Rhetorical question","Argument a fortiori","Parallel datives","Logos"],
-        tr:"how much more truly shall I now say it for an old man?",
-        what:"An <i>a fortiori</i> argument in a rhetorical question: if it was true then for a consul of 43, <i>quanto verius</i>, 'how much more truly', is it true now for a <i>senex</i> of 62. <i>seni</i> is parallel to <i>consulari</i>, both datives, measuring his life from its peak to its end. <i>nunc</i>, 'now', points at the present moment.",
-        effect:"The logic is simple and hard to resist: a man who has reached the top and then grown old has nothing left to lose. The question form makes the senate answer it for him, and so agree. And the calm about death is itself the point: the hero of the passage is a man who does not fear. This is logos, the appeal to reason, placed after the emotion of lines 2–4.",
-        ex:{ style:"Cicero argues from the greater to the lesser in a rhetorical question, <i>quanto verius nunc negabo seni?</i>, 'how much more truly shall I now say it for an old man?': the parallel datives <i>consulari ... seni</i> measure his life from its peak to its end, and the question makes the senate supply the answer that he has nothing left to fear.",
-             content:"Cicero argues that if death could not come too soon for him when he had just been consul, it certainly cannot now that he is an old man.",
-             essay:"Cicero reasons his way to courage: if death was acceptable for a consul of forty-three, it is more acceptable for an old man of sixty-two, and the argument makes his heroism look like good sense rather than bravado." } },
-      cj:{ cat:"word", tag:"Death is to be wished for", devices:["Gerundive of obligation","Formal address","Climax (iam etiam)","Martyr's language"],
-        tr:"For me, senators, death is now even something to be wished for",
-        what:"<i>optanda mors est</i> is a gerundive of obligation with <i>mihi</i> as dative of agent: death 'is to be wished for by me'. <i>vero</i>, 'indeed', and <i>iam etiam</i>, 'now even', push the claim a step beyond the previous sentence: from not fearing death to wanting it. <i>patres conscripti</i>, 'conscript fathers', is the formal address to the senate, placed in the middle of the sentence.",
-        effect:"Cicero goes beyond not fearing death to desiring it, which is the language of a martyr, and the gerundive makes the desire sound like a duty. The formal address makes the senators witnesses to the vow. A reader may suspect performance, but the words became true within a year, which is why later Romans read this passage as a hero's.",
-        ex:{ style:"Cicero raises his claim from courage to longing with the gerundive in <i>mihi vero, patres conscripti, iam etiam optanda mors est</i>, 'for me, senators, death is now even something to be wished for': the formal address makes the senate witnesses to the vow, and <i>iam etiam</i>, 'now even', marks the step from not fearing death to desiring it.",
-             content:"Cicero tells the senators that for him death is now actually something to be desired (wished for).",
-             essay:"Cicero tells the senate that death is 'something to be wished for', the language of a martyr, and because Antony did kill him a year later, later Romans read the passage as a hero's prophecy rather than an orator's pose." } },
-      ck:{ cat:"structure", tag:"The things I attained and achieved", devices:["Paired relative clauses","Ethos","Self-reference"],
-        tr:"since I have completed the things I attained and the things I achieved",
-        what:"<i>perfuncto</i>, a deponent participle agreeing with <i>mihi</i>, 'having finished with'; <i>rebus eis</i>, ablative after it. Two relative clauses, <i>quas adeptus sum</i>, 'which I obtained' (the honours: every magistracy up to the consulship, the title <i>pater patriae</i>), and <i>quasque gessi</i>, 'which I carried out' (the deeds: crushing Catiline, defending the senate). The <i>-que</i> joins them as a pair.",
-        effect:"Cicero lists his life as complete, honours and deeds both, and the pairing is a reminder to the senate of what they owe him. A man with nothing left to gain is presented as a man with nothing left to fear, and the self-praise is made to look like modesty about death.",
-        ex:{ style:"With <i>perfuncto rebus eis quas adeptus sum quasque gessi</i>, 'having completed the things I attained and the things I achieved', Cicero pairs two relative clauses, honours received and deeds done, so that a summary of his career becomes the reason he can face death, and the senate is reminded of what it owes him in the very sentence in which he claims to want nothing more.",
-             content:"Cicero says he has completed everything he set out to gain (his honours and offices) and everything he set out to do (his achievements for the state).",
-             essay:"Cicero grounds his readiness to die in a finished career of honours and achievements, which is the politician's version of heroism: not one act on a bridge but a lifetime spent for the state, ending in a willingness to lose it." } },
-      cl:{ cat:"structure", tag:"Only two wishes", devices:["Enumeration","Restriction (modo)","Peroration"],
-        tr:"I wish for only these two things: one ...",
-        what:"<i>duo modo haec opto</i>: 'these two things only I wish', with <i>modo</i>, 'only', limiting the wishes to two. <i>unum ... alterum</i>, 'one ... the other', number them, each followed by an <i>ut</i>-clause with a subjunctive (<i>relinquam</i>, <i>eveniat</i>). The structure is a formal peroration, the ending of a speech.",
-        effect:"The numbered wishes give the ending the shape of a will: an old man setting out his last two requests. The restraint of <i>modo</i>, 'only', makes the wishes sound modest, and the second one is anything but.",
-        ex:{ style:"Cicero shapes his ending as a will in <i>duo modo haec opto, unum ... alterum</i>, 'I wish for only these two things: one ... the other': the numbering and the restricting word <i>modo</i> make the wishes sound modest and final, so that the threat in the second wish arrives with the calm of a last request.",
-             content:"Cicero says he has only two wishes: that he may leave the Roman people free when he dies, and that each man may be treated as he deserves of the republic.",
-             essay:"Cicero ends his speech like a will, with two numbered wishes, so that the orator's heroism takes the form of an old man's last requests rather than a young man's deeds." } },
-      cm:{ cat:"order", tag:"To leave the Roman people free", devices:["Emphatic word position","Present participle","Key word: liberum"],
-        tr:"that in dying I may leave the Roman people free",
-        what:"<i>moriens</i>, 'dying', a present participle, sets his death alongside the wish. <i>populum Romanum liberum</i>: <i>liberum</i>, 'free', is the key word, placed last in the phrase and before the verb, as the final thing said of the Roman people; free from Antony. <i>relinquam</i>, 'I may leave', is the language of a bequest.",
-        effect:"The first wish is the whole speech in one line: a free Rome, and his own death as the moment of leaving it so. The word order makes 'free' the climax of the phrase, and the verb of leaving makes freedom his legacy.",
-        ex:{ style:"Cicero's first wish, <i>moriens populum Romanum liberum relinquam</i>, 'that in dying I may leave the Roman people free', places <i>liberum</i> last among the words describing the people and immediately before the verb, so that freedom is the one thing that matters, and the participle <i>moriens</i> makes his death the moment the bequest takes effect.",
-             content:"Cicero's first wish is that when he dies the Roman people will be free.",
-             essay:"Cicero's dying wish, as he frames it, is to leave the Roman people free: the hero's reward is not fame or power but the freedom of the state, the same value Horatius defends on the bridge and Apollo commands Augustus to restore." } },
-      cn:{ cat:"order", tag:"Nothing greater from the gods", devices:["Parenthesis","Hyperbaton","Appeal to the gods"],
-        tr:"nothing greater than this can be granted to me by the immortal gods",
-        what:"A parenthesis, breaking into the sentence between the first wish and <i>alterum</i>. <i>hoc</i> is an ablative of comparison after <i>maius</i>, 'greater than this'; <i>nihil</i>, the subject, is held back almost to the end (hyperbaton), so that the sentence builds to 'nothing'. <i>ab dis immortalibus</i>, 'by the immortal gods', makes heaven the giver.",
-        effect:"The interruption sounds spontaneous, as if the thought could not wait, and it puts the gods behind the wish: no greater gift exists. Calling a free Rome the gods' greatest gift makes a political hope sound like a prayer, and links Cicero to the tradition of Horatius' prayer to the Tiber.",
-        ex:{ style:"The parenthesis <i>hoc mihi maius ab dis immortalibus dari nihil potest</i>, 'nothing greater than this can be granted to me by the immortal gods', breaks into the sentence as if the thought could not wait: <i>nihil</i> is held back to the end so that the clause builds to 'nothing', and the mention of the gods turns a political aim into a prayer.",
-             content:"Cicero says there is no greater gift the (immortal) gods could give him than to leave the Roman people free.",
-             essay:"Cicero calls a free Rome the greatest gift the gods could give him, so that the orator, like Horatius praying to the Tiber, presents his heroism as service to heaven as well as to the state." } },
-      co:{ cat:"sound", tag:"To each as each deserves", devices:["Polyptoton","Pointed generality","Veiled threat","Final word: re publica"],
-        tr:"that it may turn out for each man as each deserves of the republic",
-        what:"<i>ita cuique eveniat ut ... quisque mereatur</i>: the polyptoton <i>cuique ... quisque</i>, 'to each ... each', with <i>ita ... ut</i>, 'in such a way ... as'. <i>mereatur</i> is subjunctive in the <i>ut</i>-clause. <i>de re publica</i>, 'of the republic', is the last phrase of the speech. The wording is deliberately general: it blesses the loyal and curses Antony without naming him.",
-        effect:"The speech ends on a threat dressed as a prayer. Everyone in the senate knows who has deserved ill of the republic, and the balanced sound of <i>cuique ... quisque</i> makes the curse sound like justice. Ending on <i>re publica</i> leaves the state, not Cicero, as the last word.",
-        ex:{ style:"Cicero closes on a balanced, general wish, <i>ut ita cuique eveniat ut de re publica quisque mereatur</i>, 'that it may turn out for each man as each deserves of the republic': the polyptoton <i>cuique ... quisque</i> gives the sentence the even sound of justice, and the refusal to name anyone lets the senate supply Antony as the man who deserves ill, so that a curse is delivered in the form of a prayer, ending on the words <i>re publica</i>.",
-             content:"Cicero's second wish is that everyone should get what they deserve from (for their conduct towards) the republic, implying that Antony should be punished.",
-             essay:"Cicero ends with a wish that each man get what he deserves of the republic: the hero's final word is the state, and the unnamed villain is left to the senate's judgement, which is how the orator makes his own courage and Antony's guilt the same argument." } }
-    },
-    questions:[
-      { id:"q1", marks:2, type:"content", q:"Lines 1–2 (<i>defendi ... tuos</i>): what does Cicero say he did as a young man, and what does he say he will not do as an old man?",
-        model:"As a young man he defended the republic (the state); as an old man he will not desert (abandon) it.",
-        scheme:["1 mark: defended the republic / the state (as consul in 63 BC is acceptable but not required).","1 mark: will not desert / abandon it. 'Will not fear Antony's swords' is the next sentence and is not what the question asks."] },
-      { id:"q2", marks:2, type:"latin", q:"Lines 1–2 (<i>defendi ... tuos</i>): pick out and translate the Latin word which shows that Cicero is speaking directly to Antony.",
-        model:"<i>tuos</i> — 'yours' / 'your (swords)'.",
-        scheme:["One mark for the Latin word <i>tuos</i>.","One mark for its translation: 'yours' or 'your'. <i>gladios</i> is not addressed to anyone and earns nothing."] },
-      { id:"q3", marks:6, type:"style", q:"Lines 1–2 (<i>defendi ... tuos</i>): how does Cicero's language make his defiance of Antony forceful? Make <b>three</b> points and refer to the Latin.",
-        model:"<b>1.</b> Balanced antithesis: <i>defendi rem publicam adulescens, non deseram senex</i>, 'I defended the republic as a young man; I shall not desert it as an old one', sets perfect against future and young against old, so that a lifetime of consistency is asserted as fact and his defiance now is made to look like the continuation of his record. <b>2.</b> Asyndeton: the four clauses are joined by no connective at all, so that each claim lands as a separate blow and the senate is given nothing to argue with; the clipped rhythm is the sound of certainty. <b>3.</b> The parallel with a named enemy: <i>contempsi Catilinae gladios, non pertimescam tuos</i>, 'I scorned the swords of Catiline; I shall not be terrified of yours'; Antony, addressed directly as <i>tuos</i>, is put in the traitor's place without being named, and the concrete <i>gladios</i> makes the threat physical and his contempt for it the more impressive.",
-        scheme:["Two marks per point: Latin quoted + what Cicero does + effect, linked to 'forceful' or 'defiance'.","Three separate points; a device named without its effect earns one mark at most for that point.","Other valid points: the repeated <i>non</i>; the strong verb <i>pertimescam</i> chosen to be denied; the metonymy of <i>gladios</i>. Stay inside lines 1–2."] },
-      { id:"q4", marks:3, type:"content", q:"Lines 2–4 (<i>quin etiam ... parturit</i>): on what condition would Cicero offer his life, and what two results does he hope his death would bring?",
-        model:"If his death could immediately bring about (secure) the freedom of the state; he hopes that the Roman people's anguish would at last produce (give birth to) what it has long been labouring towards, and that the state would be free.",
-        scheme:["1 mark: the condition, that his death could (immediately) bring about the freedom of the state.","1 mark: freedom (<i>libertas</i>) for the state / the Roman people.","1 mark: the people's anguish finally producing a result / the end of a long labour (action against Antony). Accept two separate details from the <i>ut</i>-clause and the <i>si</i>-clause."] },
-      { id:"q5", marks:4, type:"style", q:"Lines 2–4 (<i>quin etiam ... parturit</i>): how does Cicero make his offer of his own life dramatic? Make <b>two</b> points and refer to the Latin.",
-        model:"<b>1.</b> Word position: in <i>corpus libenter obtulerim</i>, 'my body ... gladly ... I would offer', the adverb <i>libenter</i> is wedged between the noun and its verb, so that 'gladly' is the word the senate hears; the sacrifice is welcomed, not merely accepted, and <i>corpus</i> makes it a physical death, not an abstract risk. <b>2.</b> The metaphor of childbirth: <i>dolor populi Romani pariat quod iam diu parturit</i>, 'the anguish of the Roman people may give birth to what it has long been labouring to deliver'; the polyptoton <i>pariat ... parturit</i> keeps the image physical, so that his death becomes the moment a long labour ends and Rome delivers itself of Antony, and the exclamation raises the voice at the passage's emotional peak.",
-        scheme:["Two marks per point: Latin + what Cicero does + effect linked to 'dramatic'.","Other valid points: <i>quin etiam</i> signposting the climax; the commercial metaphor in <i>repraesentari</i>; the alliteration of <i>morte mea</i>; the exclamation. Stay inside lines 2–4."] },
-      { id:"q6", marks:2, type:"content", q:"Lines 4–6 (<i>etenim ... seni</i>): what did Cicero say nearly twenty years ago, and where did he say it?",
-        model:"He said that death could not be untimely (premature) for a man who had been consul; he said it in this very temple (the temple of Concord, where the senate is meeting).",
-        scheme:["1 mark: death not untimely / premature / too early for a (former) consul.","1 mark: in this same temple (where the senate meets). 'In the senate' is acceptable; 'in the Forum' alone is not."] },
-      { id:"q7", marks:2, type:"interp", q:"Lines 4–6 (<i>etenim ... seni</i>): why do you think Cicero reminds the senate of what he said twenty years ago? Give <b>one</b> reason from these lines.",
-        model:"To make his present courage believable by showing that he has always thought this way: the words of 63 BC, spoken in the same temple when he saved the republic from Catiline, are offered as a precedent, so that the senate remembers the last time they followed him and is asked to follow him again. (Or: to argue that if death was acceptable for a consul then, it is more so for an old man now.)",
-        scheme:["1 mark for a clear reason (consistency / precedent / reminding the senate of his success against Catiline / the <i>a fortiori</i> argument).","1 mark for grounding it in the lines: <i>hoc ipso in templo</i>, <i>negavi ... negabo</i>, <i>quanto verius</i>."] },
-      { id:"q8", marks:3, type:"content", q:"Lines 6–8 (<i>mihi ... gessi</i>): give <b>three</b> reasons why Cicero says death is now something he can wish for.",
-        model:"He is an old man (<i>seni</i> in line 6 leads into this); he has completed (finished with) the things he attained (his honours and offices); he has completed the things he achieved (his deeds for the state).",
-        scheme:["1 mark: the honours / offices he obtained.","1 mark: the deeds / achievements he carried out.","1 mark: he has completed / finished with them, or he is old. The question says three; give three separate details from lines 6–8."] },
-      { id:"q9", marks:2, type:"latin", q:"Lines 8–11 (<i>duo modo ... mereatur</i>): pick out and translate the Latin word which shows the condition Cicero wants the Roman people to be in when he dies.",
-        model:"<i>liberum</i> — 'free'.",
-        scheme:["One mark for <i>liberum</i>.","One mark for 'free'. <i>moriens</i> describes Cicero, not the people."] },
-      { id:"q10", marks:8, type:"style", q:"Lines 6–11 (<i>mihi ... mereatur</i>): how does Cicero make the ending of his speech memorable? Make <b>four</b> points and refer to the Latin.",
-        model:"<b>1.</b> The gerundive: <i>mihi ... optanda mors est</i>, 'for me death is to be wished for', turns a feeling into a duty, so that wanting to die sounds like the correct response of a man who has finished his work; <i>iam etiam</i>, 'now even', marks the step beyond not fearing death. <b>2.</b> The formal address <i>patres conscripti</i>, 'senators', set in the middle of the sentence, makes the senate witnesses to the vow, so that the wish is spoken on the record. <b>3.</b> The numbered ending: <i>duo modo haec opto, unum ... alterum</i>, 'I wish for only these two things: one ... the other', gives the close the shape of a will; <i>modo</i>, 'only', makes the requests sound modest and final. <b>4.</b> The parenthesis <i>hoc mihi maius ab dis immortalibus dari nihil potest</i>, 'nothing greater than this can be granted to me by the immortal gods', breaks in as if the thought could not wait, and the gods turn a political hope into a prayer. <b>5.</b> (alternative) Word position: <i>populum Romanum liberum relinquam</i> places <i>liberum</i> before the verb as the last thing said of the people, so that freedom is his bequest. <b>6.</b> (alternative) The polyptoton <i>cuique ... quisque</i> in the final wish gives the curse on Antony the even sound of justice, and the speech ends on <i>re publica</i>.",
-        scheme:["Two marks per point, four points: Latin + what Cicero does + effect linked to 'memorable'.","Any four of the six points above, or other valid points from lines 6–11 (the paired relative clauses of <i>adeptus sum ... gessi</i>; the participle <i>moriens</i>).","A device named without an effect earns one mark for that point. Stay inside lines 6–11."] },
-      { id:"q11", marks:2, type:"interp", q:"Lines 8–11 (<i>duo modo ... mereatur</i>): what do you think Cicero really means by his second wish? Give <b>one</b> reason from these lines.",
-        model:"That Antony (and his supporters) should be punished, and the loyal rewarded: the wish that 'each man' should get what he deserves 'of the republic' is left general, so that the senate supplies the name; ending on <i>de re publica</i> makes conduct towards the state the test, and everyone knows who has failed it.",
-        scheme:["1 mark for identifying the threat to Antony (or the reward for the loyal).","1 mark for a reason from lines 8–11: the generality of <i>cuique ... quisque</i>; the standard <i>de re publica</i>; the contrast with the first wish for freedom."] },
-      { id:"q12", marks:3, type:"interp", q:"Lines 1–11: 'In this passage Cicero is boasting, not being brave.' How far do you agree? Give reasons for your answer, referring to the passage.",
-        model:"Partly. There is boasting: he lists his honours and deeds (<i>quas adeptus sum quasque gessi</i>), quotes his own speech of 63 BC, and calls himself the equal of the man who beat Catiline. But the passage is also an act of courage, because the swords are real: Antony had the power to kill him and did so a year later, so offering his body (<i>corpus libenter obtulerim</i>) and saying death is to be wished for were not safe things to write. The fairest judgement is that the boasting is the method and the bravery is the fact: he reminds the senate of his record in order to make his readiness to die believable.",
-        scheme:["1 mark for a clear verdict (agree / disagree / partly).","1 mark for a reason on each side, or two reasons for one side, grounded in the passage.","1 mark for a developed reason that uses a specific detail (the self-quotation, the offer of his body, the real danger from Antony, the final threat). A verdict with no reasons earns nothing."] }
+    [
+     "The Philippics",
+     "Named after the speeches of the Athenian orator Demosthenes against Philip II of Macedon in the 340s BC; the Second is the longest and most savage, and was circulated as a pamphlet rather than spoken"
+    ],
+    [
+     "'Nearly twenty years ago in this very temple'",
+     "The temple of Concord at the west end of the Forum, where the senate met on 5 December 63 BC and Cicero delivered the Fourth Catilinarian; there he said that death could not be untimely for a man who had been consul"
+    ],
+    [
+     "Catiline",
+     "Lucius Sergius Catilina, an aristocrat who plotted a coup in 63 BC after losing the consular elections; Cicero exposed him in the senate, had five of the conspirators executed without trial, and Catiline died in battle at Pistoria in January 62 BC; the Maccari painting in the Resource Booklet shows Cicero denouncing him"
+    ],
+    [
+     "What Cicero means by 'the republic'",
+     "<i>res publica</i>, the rule of the senate and magistrates that had run Rome since the kings were expelled in 509 BC; whenever Cicero says <i>res publica</i> he means the senate's authority against any one man"
+    ],
+    [
+     "What Cicero means by 'free'",
+     "<i>libertas</i> was the republican watchword: freedom from a king, a dictator or a tyrant; after Caesar it meant freedom from Antony, and the word is the hinge of this passage"
+    ],
+    [
+     "What happened next",
+     "Antony left Rome in November 44; in 43 Cicero led the senate against him; Antony joined Octavian and Lepidus in the triumvirate, and Cicero's name headed the list of men to be killed; he was caught at Formiae on 7 December 43 BC"
     ]
+   ],
+   "rows": [
+    {
+     "ln": "1–2",
+     "lat": "[[ca|defendi rem publicam adulescens, non deseram senex]]: [[cb|contempsi / Catilinae gladios]], [[cc|non pertimescam tuos]].",
+     "en": "I defended the republic as a young man; I shall not desert it as an old one. I scorned the swords of Catiline; I shall not be terrified of yours."
+    },
+    {
+     "ln": "2–4",
+     "lat": "[[cd|quin etiam corpus libenter / obtulerim]], [[ce|si repraesentari morte mea libertas civitatis potest]], [[cf|ut / aliquando dolor populi Romani pariat quod iam diu parturit]]!",
+     "en": "Indeed, I would gladly offer my body, if by my death the freedom of the state can be brought about at once, so that at last the anguish of the Roman people may give birth to what it has long been labouring to deliver!"
+    },
+    {
+     "ln": "4–6",
+     "lat": "etenim si / [[cg|abhinc annos prope viginti hoc ipso in templo]] [[ch|negavi posse mortem / immaturam esse consulari]], [[ci|quanto verius nunc negabo seni]]?",
+     "en": "For if nearly twenty years ago, in this very temple, I said that death could not be untimely for a man who had been consul, how much more truly shall I now say it for an old man?"
+    },
+    {
+     "ln": "6–8",
+     "lat": "[[cj|mihi / vero, patres conscripti, iam etiam optanda mors est]], [[ck|perfuncto rebus / eis quas adeptus sum quasque gessi]].",
+     "en": "For me, senators, death is now even something to be wished for, since I have completed the things I attained and the things I achieved."
+    },
+    {
+     "ln": "8–11",
+     "lat": "[[cl|duo modo haec opto, unum]] ut / [[cm|moriens populum Romanum liberum relinquam]] — [[cn|hoc mihi maius ab / dis immortalibus dari nihil potest]] — alterum [[co|ut ita cuique eveniat ut / de re publica quisque mereatur]].",
+     "en": "I wish for only these two things: one, that in dying I may leave the Roman people free — nothing greater than this can be granted to me by the immortal gods — the other, that it may turn out for each man as each deserves of the republic."
+    }
+   ],
+   "notes": {
+    "ca": {
+     "cat": "structure",
+     "tr": "I defended the republic as a young man; I shall not desert it as an old one",
+     "ln": "1",
+     "q3": [
+      {
+       "type": "style",
+       "q": "Line 1: How does Cicero use the shape of his opening sentence to persuade the senate that he can be trusted?"
+      },
+      {
+       "type": "content",
+       "q": "Line 1: What does Cicero say about what he did as a young man and what he will do as an old man?"
+      },
+      {
+       "type": "essay",
+       "q": "'Cicero's heroism lies in a lifetime of service, not in a single brave act.' Write one sentence that uses this point as evidence."
+      }
+     ]
+    },
+    "cb": {
+     "cat": "word",
+     "tr": "I scorned the swords of Catiline",
+     "ln": "1–2",
+     "q3": [
+      {
+       "type": "style",
+       "q": "Lines 1–2: How does Cicero make the danger he faced in 63 BC vivid and his own response impressive?"
+      },
+      {
+       "type": "content",
+       "q": "Lines 1–2: What does Cicero say he did when faced with Catiline?"
+      },
+      {
+       "type": "essay",
+       "q": "'Cicero's courage is as real as a soldier's.' Write one sentence that uses this point as evidence."
+      }
+     ]
+    },
+    "cc": {
+     "cat": "order",
+     "tr": "I shall not be terrified of yours",
+     "ln": "2",
+     "q3": [
+      {
+       "type": "style",
+       "q": "Line 2: How does Cicero turn Antony into a villain without naming him?"
+      },
+      {
+       "type": "content",
+       "q": "Line 2: What does Cicero say about Antony's threats?"
+      },
+      {
+       "type": "essay",
+       "q": "'Roman heroes are defined by the villains they stand against.' Write one sentence that uses this point as evidence."
+      }
+     ]
+    },
+    "cd": {
+     "cat": "order",
+     "tr": "Indeed, I would gladly offer my body",
+     "ln": "2–3",
+     "q3": [
+      {
+       "type": "style",
+       "q": "Lines 2–3: How does Cicero make his offer to die sound willing and heroic?"
+      },
+      {
+       "type": "content",
+       "q": "Lines 2–3: What is Cicero prepared to do, and how does he say he feels about it?"
+      },
+      {
+       "type": "essay",
+       "q": "'A Roman hero must be ready to die for the state.' Write one sentence that uses this point as evidence."
+      }
+     ]
+    },
+    "ce": {
+     "cat": "word",
+     "tr": "if by my death the freedom of the state can be brought about at once",
+     "ln": "3",
+     "q3": [
+      {
+       "type": "style",
+       "q": "Line 3: How does Cicero's choice of words present his death as a price worth paying?"
+      },
+      {
+       "type": "content",
+       "q": "Line 3: Under what condition would Cicero be willing to die?"
+      },
+      {
+       "type": "essay",
+       "q": "'Roman heroes fight for freedom.' Write one sentence that uses this point as evidence."
+      }
+     ]
+    },
+    "cf": {
+     "cat": "sound",
+     "tr": "so that at last the anguish of the Roman people may give birth to what it has long been labouring to deliver",
+     "ln": "3–4",
+     "q3": [
+      {
+       "type": "style",
+       "q": "Lines 3–4: How does Cicero use language to make the suffering of the Roman people vivid?"
+      },
+      {
+       "type": "content",
+       "q": "Lines 3–4: What does Cicero hope his death would allow the Roman people to do?"
+      },
+      {
+       "type": "essay",
+       "q": "'Cicero's heroism is about inspiring others, not about force.' Write one sentence that uses this point as evidence."
+      }
+     ]
+    },
+    "cg": {
+     "cat": "context",
+     "tr": "nearly twenty years ago, in this very temple",
+     "ln": "5",
+     "q3": [
+      {
+       "type": "style",
+       "q": "Line 5: How does Cicero use the setting to strengthen his argument?"
+      },
+      {
+       "type": "content",
+       "q": "Line 5: When and where had Cicero spoken before, and on what occasion?"
+      },
+      {
+       "type": "essay",
+       "q": "'Cicero's heroism depends on the senate remembering his past.' Write one sentence that uses this point as evidence."
+      }
+     ]
+    },
+    "ch": {
+     "cat": "context",
+     "tr": "I said that death could not be untimely for a man who had been consul",
+     "ln": "5–6",
+     "q3": [
+      {
+       "type": "style",
+       "q": "Lines 5–6: How does Cicero use his own earlier words to make his present courage convincing?"
+      },
+      {
+       "type": "content",
+       "q": "Lines 5–6: What had Cicero said about death as consul?"
+      },
+      {
+       "type": "essay",
+       "q": "'Cicero's heroism is consistent across his whole life.' Write one sentence that uses this point as evidence."
+      }
+     ]
+    },
+    "ci": {
+     "cat": "structure",
+     "tr": "how much more truly shall I now say it for an old man?",
+     "ln": "6",
+     "q3": [
+      {
+       "type": "style",
+       "q": "Line 6: How does Cicero use a question to make the senate agree with him?"
+      },
+      {
+       "type": "content",
+       "q": "Line 6: Why does Cicero think that death matters even less to him now than it did as consul?"
+      },
+      {
+       "type": "essay",
+       "q": "'Cicero's courage is a matter of reason rather than emotion.' Write one sentence that uses this point as evidence."
+      }
+     ]
+    },
+    "cj": {
+     "cat": "word",
+     "tr": "For me, senators, death is now even something to be wished for",
+     "ln": "6–7",
+     "q3": [
+      {
+       "type": "style",
+       "q": "Lines 6–7: How does Cicero go further than before in his attitude to death?"
+      },
+      {
+       "type": "content",
+       "q": "Lines 6–7: Whom does Cicero address, and what does he tell them about his attitude to death?"
+      },
+      {
+       "type": "essay",
+       "q": "'Cicero presents himself as a martyr.' Write one sentence that uses this point as evidence."
+      }
+     ]
+    },
+    "ck": {
+     "cat": "structure",
+     "tr": "since I have completed the things I attained and the things I achieved",
+     "ln": "7–8",
+     "q3": [
+      {
+       "type": "style",
+       "q": "Lines 7–8: How does Cicero's sentence structure remind the senate of his achievements?"
+      },
+      {
+       "type": "content",
+       "q": "Lines 7–8: Why does Cicero feel that his life is complete?"
+      },
+      {
+       "type": "essay",
+       "q": "'A politician can be as much a hero as a soldier.' Write one sentence that uses this point as evidence."
+      }
+     ]
+    },
+    "cl": {
+     "cat": "structure",
+     "tr": "I wish for only these two things: one ...",
+     "ln": "8",
+     "q3": [
+      {
+       "type": "style",
+       "q": "Line 8: How does Cicero shape the ending of his speech to make it sound solemn and final?"
+      },
+      {
+       "type": "content",
+       "q": "Lines 8–11: What are the two things Cicero wishes for?"
+      },
+      {
+       "type": "essay",
+       "q": "'Cicero's heroism belongs to old age, not youth.' Write one sentence that uses this point as evidence."
+      }
+     ]
+    },
+    "cm": {
+     "cat": "order",
+     "tr": "that in dying I may leave the Roman people free",
+     "ln": "9",
+     "q3": [
+      {
+       "type": "style",
+       "q": "Line 9: How does Cicero's word order emphasise what matters most to him?"
+      },
+      {
+       "type": "content",
+       "q": "Line 9: What is Cicero's first wish?"
+      },
+      {
+       "type": "essay",
+       "q": "'Freedom is the value at the centre of Roman heroism.' Write one sentence that uses this point as evidence."
+      }
+     ]
+    },
+    "cn": {
+     "cat": "order",
+     "tr": "nothing greater than this can be granted to me by the immortal gods",
+     "ln": "9–10",
+     "q3": [
+      {
+       "type": "style",
+       "q": "Lines 9–10: How does Cicero make this interruption sound sincere and important?"
+      },
+      {
+       "type": "content",
+       "q": "Lines 9–10: What does Cicero say about the gods here?"
+      },
+      {
+       "type": "essay",
+       "q": "'Roman heroes serve the gods as well as the state.' Write one sentence that uses this point as evidence."
+      }
+     ]
+    },
+    "co": {
+     "cat": "sound",
+     "tr": "that it may turn out for each man as each deserves of the republic",
+     "ln": "10–11",
+     "q3": [
+      {
+       "type": "style",
+       "q": "Lines 10–11: How does Cicero make his final wish into a threat against Antony?"
+      },
+      {
+       "type": "content",
+       "q": "Lines 10–11: What is Cicero's second wish, and whom is it aimed at?"
+      },
+      {
+       "type": "essay",
+       "q": "'In this passage the villain is as important as the hero.' Write one sentence that uses this point as evidence."
+      }
+     ]
+    }
+   },
+   "questions": [
+    {
+     "id": "q1",
+     "marks": 2,
+     "type": "content",
+     "q": "Lines 1–2 (<i>defendi ... tuos</i>): what does Cicero say he did as a young man, and what does he say he will not do as an old man?",
+     "model": "As a young man he defended the republic (the state); as an old man he will not desert (abandon) it.",
+     "scheme": [
+      "1 mark: defended the republic / the state (as consul in 63 BC is acceptable but not required).",
+      "1 mark: will not desert / abandon it. 'Will not fear Antony's swords' is the next sentence and is not what the question asks."
+     ]
+    },
+    {
+     "id": "q2",
+     "marks": 2,
+     "type": "latin",
+     "q": "Lines 1–2 (<i>defendi ... tuos</i>): pick out and translate the Latin word which shows that Cicero is speaking directly to Antony.",
+     "model": "<i>tuos</i> — 'yours' / 'your (swords)'.",
+     "scheme": [
+      "One mark for the Latin word <i>tuos</i>.",
+      "One mark for its translation: 'yours' or 'your'. <i>gladios</i> is not addressed to anyone and earns nothing."
+     ]
+    },
+    {
+     "id": "q3",
+     "marks": 6,
+     "type": "style",
+     "q": "Lines 1–2 (<i>defendi ... tuos</i>): how does Cicero's language make his defiance of Antony forceful? Make <b>three</b> points and refer to the Latin.",
+     "model": "<b>1.</b> Balanced antithesis: <i>defendi rem publicam adulescens, non deseram senex</i>, 'I defended the republic as a young man; I shall not desert it as an old one', sets perfect against future and young against old, so that a lifetime of consistency is asserted as fact and his defiance now is made to look like the continuation of his record. <b>2.</b> Asyndeton: the four clauses are joined by no connective at all, so that each claim lands as a separate blow and the senate is given nothing to argue with; the clipped rhythm is the sound of certainty. <b>3.</b> The parallel with a named enemy: <i>contempsi Catilinae gladios, non pertimescam tuos</i>, 'I scorned the swords of Catiline; I shall not be terrified of yours'; Antony, addressed directly as <i>tuos</i>, is put in the traitor's place without being named, and the concrete <i>gladios</i> makes the threat physical and his contempt for it the more impressive.",
+     "scheme": [
+      "Two marks per point: Latin quoted + what Cicero does + effect, linked to 'forceful' or 'defiance'.",
+      "Three separate points; a device named without its effect earns one mark at most for that point.",
+      "Other valid points: the repeated <i>non</i>; the strong verb <i>pertimescam</i> chosen to be denied; the metonymy of <i>gladios</i>. Stay inside lines 1–2."
+     ]
+    },
+    {
+     "id": "q4",
+     "marks": 3,
+     "type": "content",
+     "q": "Lines 2–4 (<i>quin etiam ... parturit</i>): on what condition would Cicero offer his life, and what two results does he hope his death would bring?",
+     "model": "If his death could immediately bring about (secure) the freedom of the state; he hopes that the Roman people's anguish would at last produce (give birth to) what it has long been labouring towards, and that the state would be free.",
+     "scheme": [
+      "1 mark: the condition, that his death could (immediately) bring about the freedom of the state.",
+      "1 mark: freedom (<i>libertas</i>) for the state / the Roman people.",
+      "1 mark: the people's anguish finally producing a result / the end of a long labour (action against Antony). Accept two separate details from the <i>ut</i>-clause and the <i>si</i>-clause."
+     ]
+    },
+    {
+     "id": "q5",
+     "marks": 4,
+     "type": "style",
+     "q": "Lines 2–4 (<i>quin etiam ... parturit</i>): how does Cicero make his offer of his own life dramatic? Make <b>two</b> points and refer to the Latin.",
+     "model": "<b>1.</b> Word position: in <i>corpus libenter obtulerim</i>, 'my body ... gladly ... I would offer', the adverb <i>libenter</i> is wedged between the noun and its verb, so that 'gladly' is the word the senate hears; the sacrifice is welcomed, not merely accepted, and <i>corpus</i> makes it a physical death, not an abstract risk. <b>2.</b> The metaphor of childbirth: <i>dolor populi Romani pariat quod iam diu parturit</i>, 'the anguish of the Roman people may give birth to what it has long been labouring to deliver'; the polyptoton <i>pariat ... parturit</i> keeps the image physical, so that his death becomes the moment a long labour ends and Rome delivers itself of Antony, and the exclamation raises the voice at the passage's emotional peak.",
+     "scheme": [
+      "Two marks per point: Latin + what Cicero does + effect linked to 'dramatic'.",
+      "Other valid points: <i>quin etiam</i> signposting the climax; the commercial metaphor in <i>repraesentari</i>; the alliteration of <i>morte mea</i>; the exclamation. Stay inside lines 2–4."
+     ]
+    },
+    {
+     "id": "q6",
+     "marks": 2,
+     "type": "content",
+     "q": "Lines 4–6 (<i>etenim ... seni</i>): what did Cicero say nearly twenty years ago, and where did he say it?",
+     "model": "He said that death could not be untimely (premature) for a man who had been consul; he said it in this very temple (the temple of Concord, where the senate is meeting).",
+     "scheme": [
+      "1 mark: death not untimely / premature / too early for a (former) consul.",
+      "1 mark: in this same temple (where the senate meets). 'In the senate' is acceptable; 'in the Forum' alone is not."
+     ]
+    },
+    {
+     "id": "q7",
+     "marks": 2,
+     "type": "interp",
+     "q": "Lines 4–6 (<i>etenim ... seni</i>): why do you think Cicero reminds the senate of what he said twenty years ago? Give <b>one</b> reason from these lines.",
+     "model": "To make his present courage believable by showing that he has always thought this way: the words of 63 BC, spoken in the same temple when he saved the republic from Catiline, are offered as a precedent, so that the senate remembers the last time they followed him and is asked to follow him again. (Or: to argue that if death was acceptable for a consul then, it is more so for an old man now.)",
+     "scheme": [
+      "1 mark for a clear reason (consistency / precedent / reminding the senate of his success against Catiline / the <i>a fortiori</i> argument).",
+      "1 mark for grounding it in the lines: <i>hoc ipso in templo</i>, <i>negavi ... negabo</i>, <i>quanto verius</i>."
+     ]
+    },
+    {
+     "id": "q8",
+     "marks": 3,
+     "type": "content",
+     "q": "Lines 6–8 (<i>mihi ... gessi</i>): give <b>three</b> reasons why Cicero says death is now something he can wish for.",
+     "model": "He is an old man (<i>seni</i> in line 6 leads into this); he has completed (finished with) the things he attained (his honours and offices); he has completed the things he achieved (his deeds for the state).",
+     "scheme": [
+      "1 mark: the honours / offices he obtained.",
+      "1 mark: the deeds / achievements he carried out.",
+      "1 mark: he has completed / finished with them, or he is old. The question says three; give three separate details from lines 6–8."
+     ]
+    },
+    {
+     "id": "q9",
+     "marks": 2,
+     "type": "latin",
+     "q": "Lines 8–11 (<i>duo modo ... mereatur</i>): pick out and translate the Latin word which shows the condition Cicero wants the Roman people to be in when he dies.",
+     "model": "<i>liberum</i> — 'free'.",
+     "scheme": [
+      "One mark for <i>liberum</i>.",
+      "One mark for 'free'. <i>moriens</i> describes Cicero, not the people."
+     ]
+    },
+    {
+     "id": "q10",
+     "marks": 8,
+     "type": "style",
+     "q": "Lines 6–11 (<i>mihi ... mereatur</i>): how does Cicero make the ending of his speech memorable? Make <b>four</b> points and refer to the Latin.",
+     "model": "<b>1.</b> The gerundive: <i>mihi ... optanda mors est</i>, 'for me death is to be wished for', turns a feeling into a duty, so that wanting to die sounds like the correct response of a man who has finished his work; <i>iam etiam</i>, 'now even', marks the step beyond not fearing death. <b>2.</b> The formal address <i>patres conscripti</i>, 'senators', set in the middle of the sentence, makes the senate witnesses to the vow, so that the wish is spoken on the record. <b>3.</b> The numbered ending: <i>duo modo haec opto, unum ... alterum</i>, 'I wish for only these two things: one ... the other', gives the close the shape of a will; <i>modo</i>, 'only', makes the requests sound modest and final. <b>4.</b> The parenthesis <i>hoc mihi maius ab dis immortalibus dari nihil potest</i>, 'nothing greater than this can be granted to me by the immortal gods', breaks in as if the thought could not wait, and the gods turn a political hope into a prayer. <b>5.</b> (alternative) Word position: <i>populum Romanum liberum relinquam</i> places <i>liberum</i> before the verb as the last thing said of the people, so that freedom is his bequest. <b>6.</b> (alternative) The polyptoton <i>cuique ... quisque</i> in the final wish gives the curse on Antony the even sound of justice, and the speech ends on <i>re publica</i>.",
+     "scheme": [
+      "Two marks per point, four points: Latin + what Cicero does + effect linked to 'memorable'.",
+      "Any four of the six points above, or other valid points from lines 6–11 (the paired relative clauses of <i>adeptus sum ... gessi</i>; the participle <i>moriens</i>).",
+      "A device named without an effect earns one mark for that point. Stay inside lines 6–11."
+     ]
+    },
+    {
+     "id": "q11",
+     "marks": 2,
+     "type": "interp",
+     "q": "Lines 8–11 (<i>duo modo ... mereatur</i>): what do you think Cicero really means by his second wish? Give <b>one</b> reason from these lines.",
+     "model": "That Antony (and his supporters) should be punished, and the loyal rewarded: the wish that 'each man' should get what he deserves 'of the republic' is left general, so that the senate supplies the name; ending on <i>de re publica</i> makes conduct towards the state the test, and everyone knows who has failed it.",
+     "scheme": [
+      "1 mark for identifying the threat to Antony (or the reward for the loyal).",
+      "1 mark for a reason from lines 8–11: the generality of <i>cuique ... quisque</i>; the standard <i>de re publica</i>; the contrast with the first wish for freedom."
+     ]
+    },
+    {
+     "id": "q12",
+     "marks": 3,
+     "type": "interp",
+     "q": "Lines 1–11: 'In this passage Cicero is boasting, not being brave.' How far do you agree? Give reasons for your answer, referring to the passage.",
+     "model": "Partly. There is boasting: he lists his honours and deeds (<i>quas adeptus sum quasque gessi</i>), quotes his own speech of 63 BC, and calls himself the equal of the man who beat Catiline. But the passage is also an act of courage, because the swords are real: Antony had the power to kill him and did so a year later, so offering his body (<i>corpus libenter obtulerim</i>) and saying death is to be wished for were not safe things to write. The fairest judgement is that the boasting is the method and the bravery is the fact: he reminds the senate of his record in order to make his readiness to die believable.",
+     "scheme": [
+      "1 mark for a clear verdict (agree / disagree / partly).",
+      "1 mark for a reason on each side, or two reasons for one side, grounded in the passage.",
+      "1 mark for a developed reason that uses a specific detail (the self-quotation, the offer of his body, the real danger from Antony, the final threat). A verdict with no reasons earns nothing."
+     ]
+    }
+   ]
   }
-  ],
-
-  /* =================================================================
-     PRACTICE · three further sets of exam-style questions on the passage
-     ================================================================= */
-  practiceIntro:"Three more sets of questions on the same passage, each built like the Section A questions on one prescribed text: content, pick-out-and-translate, style, impression and judgement, with the marks rising across the sets. Work through a set in one sitting, under about 20 minutes, with the text open. Write first, then reveal, compare and mark yourself. The line references are the ones on the Eduqas text; stay inside them.",
-  practice:[
-    { id:"pa", title:"Practice set A — the opening and the offer (lines 1–8)", marks:24,
-      intro:"Eight questions in the order the paper would ask them, working down the passage. 24 marks.",
-      questions:[
-        { id:"a1", marks:2, type:"content", q:"Line 2 (<i>contempsi ... tuos</i>): whose swords does Cicero say he scorned, and whose does he say he will not fear?",
-          model:"He scorned the swords of Catiline; he will not fear Antony's ('yours', the man he is addressing).",
-          scheme:["1 mark: Catiline's.","1 mark: Antony's / 'yours' / the person addressed. 'The enemy's' on its own is not enough."] },
-        { id:"a2", marks:2, type:"latin", q:"Lines 1–2 (<i>defendi ... tuos</i>): pick out and translate the Latin word which shows Cicero's attitude to Catiline's threat.",
-          model:"<i>contempsi</i> — 'I scorned' / 'I despised'.",
-          scheme:["One mark for <i>contempsi</i>.","One mark for 'I scorned / despised / had contempt for'. 'I defended' is a different word and earns nothing."] },
-        { id:"a3", marks:2, type:"content", q:"Lines 2–3 (<i>quin etiam ... potest</i>): what does Cicero say he would do, and how does he say he would feel about doing it?",
-          model:"He would offer his body (give up his life); he would do it gladly / willingly.",
-          scheme:["1 mark: offer his body / his life / die.","1 mark: gladly / willingly (<i>libenter</i>). 'If it brought freedom' is the condition, not the feeling."] },
-        { id:"a4", marks:4, type:"style", q:"Lines 2–3 (<i>quin etiam ... potest</i>): how does Cicero's language make his willingness to die convincing? Make <b>two</b> points and refer to the Latin.",
-          model:"<b>1.</b> <i>quin etiam</i>, 'indeed, even', signposts a climax: the sentence steps up from not fearing Antony to offering his life, so that the offer sounds like the next stage of a settled position rather than a sudden boast. <b>2.</b> <i>libenter</i>, 'gladly', is placed between <i>corpus</i> and <i>obtulerim</i>, splitting the noun from its verb so that the adverb is the word the senate hears: the sacrifice is welcomed, which is what makes it believable. <b>3.</b> (alternative) <i>repraesentari</i>, a word for paying in cash, and the alliteration of <i>morte mea</i> make his death a price paid at once, by him, for the state's <i>libertas</i>: the transaction is concrete and the buyer is named.",
-          scheme:["Two marks per point: Latin + what Cicero does + effect linked to 'convincing'.","Any two of the three points, or another valid point inside lines 2–3 (the open condition <i>si ... potest</i>; the physical noun <i>corpus</i>).","A device named without an effect earns one mark at most."] },
-        { id:"a5", marks:3, type:"content", q:"Lines 3–4 (<i>ut aliquando ... parturit</i>): what does Cicero hope will happen as a result of his death? Give <b>three</b> details.",
-          model:"That the anguish (pain, indignation) of the Roman people would at last (<i>aliquando</i>) give birth to (produce) what it has for a long time (<i>iam diu</i>) been in labour with (been working towards): that is, action against Antony.",
-          scheme:["1 mark: the anguish / suffering of the Roman people.","1 mark: would (at last) produce / give birth to a result.","1 mark: what it has long been labouring for / working towards; or 'at last' / 'for a long time' as a separate timing detail. Three details from these lines; the childbirth image is content here, not style."] },
-        { id:"a6", marks:2, type:"interp", q:"Lines 3–4 (<i>ut aliquando ... parturit</i>): what impression do you get of the Roman people from these lines? Give <b>one</b> reason.",
-          model:"That they are suffering and have been for a long time, but are on the point of acting: <i>dolor</i>, 'anguish', and <i>iam diu</i>, 'for a long time now', make them a people in pain, while <i>pariat</i>, 'may give birth', makes the pain purposeful, a labour that will produce something. (Also acceptable: that they are passive and need Cicero's death to make them act.)",
-          scheme:["1 mark for a clear impression (suffering / long-suffering / ready to act / needing a push).","1 mark for a reason from lines 3–4: <i>dolor</i>, <i>iam diu</i>, <i>aliquando</i>, the childbirth image."] },
-        { id:"a7", marks:6, type:"style", q:"Lines 4–8 (<i>etenim ... gessi</i>): how does Cicero convince the senate that he does not fear death? Make <b>three</b> points and refer to the Latin.",
-          model:"<b>1.</b> The argument from the stronger case in a rhetorical question: <i>negavi posse mortem immaturam esse consulari, quanto verius nunc negabo seni?</i>, 'I said that death could not be untimely for a man who had been consul; how much more truly shall I now say it for an old man?': if it was true at 43, it is truer at 62, and the question makes the senate supply the answer. <b>2.</b> <i>hoc ipso in templo</i>, 'in this very temple': the pointing word puts the senators back in the temple of Concord in 63 BC, when he last said this and was right, so that his calm about death has a precedent they witnessed. <b>3.</b> The gerundive <i>optanda mors est</i>, 'death is to be wished for', with <i>iam etiam</i>, 'now even', goes beyond not fearing death to wanting it, and the formal address <i>patres conscripti</i> makes the senate witnesses to the vow. <b>4.</b> (alternative) <i>perfuncto rebus eis quas adeptus sum quasque gessi</i>, 'having completed the things I attained and the things I achieved': two relative clauses sum up a finished career, so that a man with nothing left to gain is shown as a man with nothing left to lose.",
-          scheme:["Two marks per point, three points: Latin + what Cicero does + effect linked to 'does not fear death'.","Any three of the four, or other valid points inside lines 4–8 (the tense pair <i>negavi ... negabo</i>; the parallel datives <i>consulari ... seni</i>).","Stay inside lines 4–8: the opening antithesis and the two wishes are outside the reference."] },
-        { id:"a8", marks:3, type:"interp", q:"Lines 10–11 (<i>alterum ut ... mereatur</i>): 'Cicero's last sentence is a threat, not a wish.' How far do you agree? Give reasons from these lines.",
-          model:"Largely. It is phrased as a wish (<i>opto</i> governs it, and the subjunctive <i>eveniat</i> is the grammar of wishing) and it names nobody, which lets it pass as a prayer for justice. But 'each man as each deserves of the republic' can only mean one thing in November 44 BC: that Antony, who in Cicero's view has deserved ill of the republic, should get what is coming to him, and the senate is left to supply the name. The form is a wish; the content is a threat, and the calm form makes the threat harder to answer.",
-          scheme:["1 mark for a clear verdict.","1 mark for a reason on the 'wish' side (the grammar, the generality, the prayer-like form) or the 'threat' side (what 'deserves of the republic' must mean; Antony unnamed but obvious).","1 mark for a developed reason using a specific detail (<i>cuique ... quisque</i>, <i>de re publica</i>, <i>mereatur</i>). A verdict with no reasons earns nothing."] }
-      ] },
-
-    { id:"pb", title:"Practice set B — the precedent and the two wishes (lines 4–11)", marks:23,
-      intro:"Eight questions, weighted towards the second half of the passage, where the content questions are harder to get right because the Latin is more compressed. 23 marks.",
-      questions:[
-        { id:"b1", marks:3, type:"content", q:"Lines 4–6 (<i>etenim ... consulari</i>): give <b>three</b> details about the earlier occasion Cicero refers to.",
-          model:"It was nearly twenty years ago (63 BC); it was in this very temple (the temple of Concord, where the senate is meeting); he said that death could not be untimely (premature) for a man who had been consul.",
-          scheme:["1 mark: nearly twenty years ago.","1 mark: in this (very) temple / where the senate is now meeting.","1 mark: he said death could not be untimely for an ex-consul. 'During the Catiline conspiracy' is true but is not in the lines; it earns nothing on its own."] },
-        { id:"b2", marks:2, type:"latin", q:"Lines 4–6 (<i>etenim ... seni</i>): pick out and translate the Latin word which means 'untimely'.",
-          model:"<i>immaturam</i> — 'untimely' / 'premature' / 'too early'.",
-          scheme:["One mark for <i>immaturam</i>.","One mark for 'untimely / premature / too early'. 'Immature' is not an acceptable translation here."] },
-        { id:"b3", marks:4, type:"style", q:"Lines 4–6 (<i>etenim ... seni</i>): how does Cicero's language make his argument persuasive? Make <b>two</b> points and refer to the Latin.",
-          model:"<b>1.</b> The structure <i>si ... quanto verius ...?</i>, 'if ... how much more truly ...?', is an argument from the stronger case: the <i>si</i>-clause gives the weaker case (a consul of 43) and the question the stronger (an old man of 62), so that the senate follows the logic step by step and reaches his conclusion for him. <b>2.</b> <i>negavi ... negabo</i>, 'I said ... I shall say': the same verb in the perfect and the future makes what he said then the guarantee of what he says now, so that consistency over twenty years is offered as proof. <b>3.</b> (alternative) <i>hoc ipso in templo</i>, 'in this very temple': the deixis makes the building a witness; the senators are sitting where they followed him against Catiline.",
-          scheme:["Two marks per point: Latin + what Cicero does + effect linked to 'persuasive'.","Any two of the three, or the parallel datives <i>consulari ... seni</i>.","Stay inside lines 4–6."] },
-        { id:"b4", marks:2, type:"content", q:"Lines 6–7 (<i>mihi ... est</i>): whom is Cicero addressing, and what does he now say about death?",
-          model:"The senators (<i>patres conscripti</i>, 'conscript fathers'); death is now even something to be wished for (desired) by him.",
-          scheme:["1 mark: the senators / the senate / 'conscript fathers'. 'Antony' is wrong: the <i>tuos</i> of line 2 is not in these lines.","1 mark: death is to be wished for / desirable / something he wants."] },
-        { id:"b5", marks:2, type:"latin", q:"Lines 7–8 (<i>perfuncto ... gessi</i>): pick out and translate the Latin word which shows that Cicero regards his life's work as finished.",
-          model:"<i>perfuncto</i> — 'having completed' / 'having finished (with)' / 'having accomplished'.",
-          scheme:["One mark for <i>perfuncto</i>.","One mark for 'having completed / finished / accomplished'. <i>gessi</i>, 'I achieved', is a near miss: it names the deeds, not their completion."] },
-        { id:"b6", marks:2, type:"content", q:"Lines 8–9 (<i>duo modo ... relinquam</i>): what is Cicero's first wish, and when does he want it fulfilled?",
-          model:"That he may leave the Roman people free; when he dies (<i>moriens</i>, 'dying').",
-          scheme:["1 mark: to leave the Roman people free.","1 mark: at / in his death. 'That everyone gets what they deserve' is the second wish and is outside the reference."] },
-        { id:"b7", marks:6, type:"style", q:"Lines 8–11 (<i>duo modo ... mereatur</i>): how does Cicero's language make his two wishes impressive? Make <b>three</b> points and refer to the Latin.",
-          model:"<b>1.</b> <i>duo modo haec opto, unum ... alterum</i>, 'I wish for only these two things: one ... the other': the numbering and the restricting word <i>modo</i> give the ending the shape of a will, modest in form, so that the wishes carry the weight of an old man's last requests. <b>2.</b> <i>moriens populum Romanum liberum relinquam</i>, 'that in dying I may leave the Roman people free': <i>liberum</i> is placed last among the words describing the people and before the verb, so that freedom is the one thing that matters, and the participle <i>moriens</i> ties it to his death. <b>3.</b> The parenthesis <i>hoc mihi maius ab dis immortalibus dari nihil potest</i>, 'nothing greater than this can be granted to me by the immortal gods': the aside breaks in as if the thought could not wait, <i>nihil</i> is held back to the end, and the gods make a political wish a prayer. <b>4.</b> (alternative) <i>ita cuique eveniat ut ... quisque mereatur</i>, 'that it may turn out for each man as each deserves': the polyptoton <i>cuique ... quisque</i> gives the curse on Antony the even sound of justice, and the speech ends on <i>re publica</i>.",
-          scheme:["Two marks per point, three points: Latin + what Cicero does + effect linked to 'impressive'.","Any three of the four.","Stay inside lines 8–11."] },
-        { id:"b8", marks:2, type:"interp", q:"Lines 1–11: what impression do you get of Cicero as a man from this passage? Give <b>one</b> reason.",
-          model:"That he is proud of his record and sure of his own importance: he quotes his own speech of 63 BC, lists his honours and achievements, and makes his own death the thing that would free Rome. (Also acceptable: that he is brave, since he offers his life to a man who could take it; or that he is consistent, since he claims the same policy at 62 as at 43.)",
-          scheme:["1 mark for a clear impression (proud / self-important / brave / consistent / devoted to the republic).","1 mark for a reason tied to a specific detail from the passage."] }
-      ] },
-
-    { id:"pc", title:"Practice set C — whole-passage questions and the 8-mark style question", marks:26,
-      intro:"Seven questions that need the whole passage in view, including an 8-mark style question and a paragraph on the question Vivek's examiner is most likely to ask about this text. 26 marks.",
-      questions:[
-        { id:"c1", marks:8, type:"style", q:"Lines 1–4 (<i>defendi ... parturit</i>): how does Cicero's language make this a dramatic opening? Make <b>four</b> points and refer to the Latin.",
-          model:"<b>1.</b> The balanced antithesis <i>defendi rem publicam adulescens, non deseram senex</i>, 'I defended the republic as a young man; I shall not desert it as an old one': perfect against future, young against old, with no connective, so that a whole career is asserted as fact in one line. <b>2.</b> The exact parallel <i>contempsi Catilinae gladios, non pertimescam tuos</i>, 'I scorned the swords of Catiline; I shall not be terrified of yours': Antony, addressed as <i>tuos</i> though he is not present, is put in Catiline's slot and condemned by the structure, and the concrete <i>gladios</i> makes the threat steel. <b>3.</b> <i>quin etiam corpus libenter obtulerim</i>, 'indeed, I would gladly offer my body': <i>quin etiam</i> signposts the climax and <i>libenter</i>, wedged between <i>corpus</i> and its verb, makes the sacrifice welcome rather than endured. <b>4.</b> The metaphor of childbirth, <i>dolor populi Romani pariat quod iam diu parturit</i>, 'the anguish of the Roman people may give birth to what it has long been labouring to deliver': the polyptoton <i>pariat ... parturit</i> keeps the image physical, and the sentence ends as an exclamation, the passage's emotional peak. <b>5.</b> (alternative) <i>repraesentari morte mea libertas</i>: the commercial verb and the alliteration make his death the cash price of Rome's freedom. <b>6.</b> (alternative) The asyndeton of lines 1–2: four clauses with no connective, each landing as a separate blow.",
-          scheme:["Two marks per point, four points: Latin + what Cicero does + effect linked to 'dramatic'.","Any four of the six, or other valid points inside lines 1–4.","A device named without an effect earns one mark for that point. Latin without translation or explanation earns nothing."] },
-        { id:"c2", marks:2, type:"content", q:"Lines 9–10 (<i>hoc mihi ... potest</i>): what does Cicero say the immortal gods cannot do?",
-          model:"They cannot give (grant) him anything greater than this, that is, than leaving the Roman people free.",
-          scheme:["1 mark: give / grant him anything greater.","1 mark: than this / than leaving the Roman people free (the comparison). 'The gods cannot save him' is not in the lines."] },
-        { id:"c3", marks:2, type:"latin", q:"Lines 8–11 (<i>duo modo ... mereatur</i>): pick out and translate the Latin word with which Cicero limits the number of his wishes.",
-          model:"<i>modo</i> — 'only' / 'just'.",
-          scheme:["One mark for <i>modo</i>.","One mark for 'only / just'. <i>duo</i> gives the number; it does not limit it."] },
-        { id:"c4", marks:2, type:"interp", q:"Lines 7–8 (<i>perfuncto ... gessi</i>): why do you think Cicero mentions his honours and achievements at this point? Give <b>one</b> reason.",
-          model:"To explain why death is now acceptable to him, and at the same time to remind the senate of what it owes him: a man who has completed everything he set out to gain and to do has nothing left to lose, and the senate hearing the list is reminded that the gains and the deeds were for the republic. (Also acceptable: to build his authority, ethos, before the two wishes.)",
-          scheme:["1 mark for a clear reason (nothing left to lose / reminding the senate of his service / building authority).","1 mark for grounding it in the lines: the two relative clauses, <i>perfuncto</i>, the link to <i>optanda mors est</i>."] },
-        { id:"c5", marks:3, type:"interp", q:"Lines 1–11: Cicero never names Antony in this passage. Explain how this makes his attack more effective. Give <b>two</b> reasons.",
-          model:"First, the parallel with Catiline does the naming for him: <i>contempsi Catilinae gladios, non pertimescam tuos</i> puts 'yours' in the slot where Catiline's name stood, so Antony is identified as the new traitor by the structure, which is harder to answer than an accusation. Second, the final wish, that each man get what he deserves of the republic, is general enough to pass as a prayer for justice while everyone in the senate supplies Antony's name, so the threat cannot be called a threat. (Also: the one word <i>tuos</i> addresses him directly as if present, which is more contemptuous than naming him.)",
-          scheme:["1 mark for each of two clear reasons (the Catiline parallel; the general final wish; the contemptuous <i>tuos</i>).","1 mark for developing at least one reason with a specific detail from the passage. Reasons without reference to the passage earn one mark at most."] },
-        { id:"c6", marks:3, type:"content", q:"Lines 1–11: give <b>three</b> facts about his own past that Cicero reminds the senate of in this passage.",
-          model:"He defended the republic as a young man (as consul); he scorned the swords (violent threats) of Catiline; nearly twenty years ago in this temple he said death could not be untimely for an ex-consul; he has attained honours and achieved deeds for the state (any three).",
-          scheme:["1 mark per fact, three facts, each from the passage.","Facts from outside the passage (that he was consul in 63 BC, that he executed the conspirators, that he was called <i>pater patriae</i>) earn nothing unless the passage states them."] },
-        { id:"c7", marks:6, type:"essay", q:"Using this passage only, write <b>one paragraph</b> (about 120–150 words) answering: <i>How does Cicero present himself as a Roman hero?</i> Make a clear point, support it with at least two details from the passage in English, explain each, and end with a sentence that answers the question.",
-          model:"Cicero presents himself as a hero whose courage is a lifelong record rather than a single deed. He opens by claiming that he defended the republic as a young man and will not desert it as an old one, and that having scorned Catiline's swords he will not fear Antony's: the two halves of his career are set side by side so that consistency itself looks heroic. He then offers to die, gladly, if his death could buy the freedom of the state, and goes further, telling the senate that for a man who has finished his work death is something to be wished for. This is the language of self-sacrifice that Romans admired in soldiers, and he ends by making a free Rome his dying wish and the greatest gift the gods could give him. Cicero's hero, then, is a man who has served the state all his life and is ready to end that life for it, with the twist that the service was done in words.",
-          scheme:["Clear point about how he presents himself.","At least two details from the passage, in English, each explained.","A concluding sentence that answers the question.","No Latin needed; stay inside the passage."] }
-      ] }
-  ],
-
-  synthesis:{
-    title:"Using Cicero in the 16-mark essay",
-    intro:"A likely essay: <i>'A Roman hero is a man who is ready to die for Rome.' How far do the texts and pictures you have studied support this view?</i> You need at least four texts or pictures, in English, with every example linked to the question. Cicero is your clearest case of a hero whose heroism is a readiness to die rather than a deed. Practise the Cicero paragraph here; the plan below shows where it sits in a full answer.<br><br><b>A plan for the full essay:</b> (1) Horatius: ready to die and nearly does, the deed itself; (2) Cicero: ready to die in words, and the words came true; (3) Augustus at Actium: the gods fight for him, so he never has to risk death, which complicates the statement; (4) Sejanus and Mezentius: the villains cling to life and power, the opposite of the statement; (5) Camilla, if you have studied her: dies for her side, which tests whether a woman and an enemy of Rome can count. Conclusion: readiness to die is necessary but the texts add two more tests, that the death is for the state and that the gods approve.",
-    q:"Write <b>one paragraph</b> (about 130–160 words) on Cicero for that essay. Make a clear point about whether he supports the statement, give at least two specific details from the passage in English, explain each, and end with a sentence that links back to the question. Then add <b>one sentence</b> saying which other text you would use next and why.",
-    marks:6,
-    model:"Cicero supports the statement, but as a hero in words rather than deeds. In the last paragraph of the Second Philippic he tells the senate that he defended the republic as a young man and will not desert it as an old one, and that having scorned Catiline's swords he will not fear Antony's: his courage is presented as a lifelong record, not a single act. He goes further and says he would gladly offer his body if his death could buy the freedom of the state, and that for a man who has finished his career death is actually something to be wished for. This is the language of a martyr, and a reader might call it a boast, except that the threat was real: Antony had him killed a year later, so the readiness to die was proved by events. Cicero therefore fits the statement exactly, with the twist that his weapon was a speech. Horatius would come next, as the hero whose readiness to die is shown in a deed on the bridge rather than in a declaration.",
-    scheme:["Clear point about the statement (does Cicero support it, and how).","At least two specific details from the passage, in English, each explained.","A link back to the question at the end.","One sentence naming the next text and giving a reason (comparison or contrast).","No Latin needed; Latin earns nothing in the essay."]
+ ],
+ "practiceIntro": "Three more sets of questions on the same passage, each built like the Section A questions on one prescribed text: content, pick-out-and-translate, style, impression and judgement, with the marks rising across the sets. Work through a set in one sitting, under about 20 minutes, with the text open. Write first, then reveal, compare and mark yourself. The line references are the ones on the Eduqas text; stay inside them.",
+ "practice": [
+  {
+   "id": "pa",
+   "title": "Practice set A — the opening and the offer (lines 1–8)",
+   "marks": 24,
+   "intro": "Eight questions in the order the paper would ask them, working down the passage. 24 marks.",
+   "questions": [
+    {
+     "id": "a1",
+     "marks": 2,
+     "type": "content",
+     "q": "Line 2 (<i>contempsi ... tuos</i>): whose swords does Cicero say he scorned, and whose does he say he will not fear?",
+     "model": "He scorned the swords of Catiline; he will not fear Antony's ('yours', the man he is addressing).",
+     "scheme": [
+      "1 mark: Catiline's.",
+      "1 mark: Antony's / 'yours' / the person addressed. 'The enemy's' on its own is not enough."
+     ]
+    },
+    {
+     "id": "a2",
+     "marks": 2,
+     "type": "latin",
+     "q": "Lines 1–2 (<i>defendi ... tuos</i>): pick out and translate the Latin word which shows Cicero's attitude to Catiline's threat.",
+     "model": "<i>contempsi</i> — 'I scorned' / 'I despised'.",
+     "scheme": [
+      "One mark for <i>contempsi</i>.",
+      "One mark for 'I scorned / despised / had contempt for'. 'I defended' is a different word and earns nothing."
+     ]
+    },
+    {
+     "id": "a3",
+     "marks": 2,
+     "type": "content",
+     "q": "Lines 2–3 (<i>quin etiam ... potest</i>): what does Cicero say he would do, and how does he say he would feel about doing it?",
+     "model": "He would offer his body (give up his life); he would do it gladly / willingly.",
+     "scheme": [
+      "1 mark: offer his body / his life / die.",
+      "1 mark: gladly / willingly (<i>libenter</i>). 'If it brought freedom' is the condition, not the feeling."
+     ]
+    },
+    {
+     "id": "a4",
+     "marks": 4,
+     "type": "style",
+     "q": "Lines 2–3 (<i>quin etiam ... potest</i>): how does Cicero's language make his willingness to die convincing? Make <b>two</b> points and refer to the Latin.",
+     "model": "<b>1.</b> <i>quin etiam</i>, 'indeed, even', signposts a climax: the sentence steps up from not fearing Antony to offering his life, so that the offer sounds like the next stage of a settled position rather than a sudden boast. <b>2.</b> <i>libenter</i>, 'gladly', is placed between <i>corpus</i> and <i>obtulerim</i>, splitting the noun from its verb so that the adverb is the word the senate hears: the sacrifice is welcomed, which is what makes it believable. <b>3.</b> (alternative) <i>repraesentari</i>, a word for paying in cash, and the alliteration of <i>morte mea</i> make his death a price paid at once, by him, for the state's <i>libertas</i>: the transaction is concrete and the buyer is named.",
+     "scheme": [
+      "Two marks per point: Latin + what Cicero does + effect linked to 'convincing'.",
+      "Any two of the three points, or another valid point inside lines 2–3 (the open condition <i>si ... potest</i>; the physical noun <i>corpus</i>).",
+      "A device named without an effect earns one mark at most."
+     ]
+    },
+    {
+     "id": "a5",
+     "marks": 3,
+     "type": "content",
+     "q": "Lines 3–4 (<i>ut aliquando ... parturit</i>): what does Cicero hope will happen as a result of his death? Give <b>three</b> details.",
+     "model": "That the anguish (pain, indignation) of the Roman people would at last (<i>aliquando</i>) give birth to (produce) what it has for a long time (<i>iam diu</i>) been in labour with (been working towards): that is, action against Antony.",
+     "scheme": [
+      "1 mark: the anguish / suffering of the Roman people.",
+      "1 mark: would (at last) produce / give birth to a result.",
+      "1 mark: what it has long been labouring for / working towards; or 'at last' / 'for a long time' as a separate timing detail. Three details from these lines; the childbirth image is content here, not style."
+     ]
+    },
+    {
+     "id": "a6",
+     "marks": 2,
+     "type": "interp",
+     "q": "Lines 3–4 (<i>ut aliquando ... parturit</i>): what impression do you get of the Roman people from these lines? Give <b>one</b> reason.",
+     "model": "That they are suffering and have been for a long time, but are on the point of acting: <i>dolor</i>, 'anguish', and <i>iam diu</i>, 'for a long time now', make them a people in pain, while <i>pariat</i>, 'may give birth', makes the pain purposeful, a labour that will produce something. (Also acceptable: that they are passive and need Cicero's death to make them act.)",
+     "scheme": [
+      "1 mark for a clear impression (suffering / long-suffering / ready to act / needing a push).",
+      "1 mark for a reason from lines 3–4: <i>dolor</i>, <i>iam diu</i>, <i>aliquando</i>, the childbirth image."
+     ]
+    },
+    {
+     "id": "a7",
+     "marks": 6,
+     "type": "style",
+     "q": "Lines 4–8 (<i>etenim ... gessi</i>): how does Cicero convince the senate that he does not fear death? Make <b>three</b> points and refer to the Latin.",
+     "model": "<b>1.</b> The argument from the stronger case in a rhetorical question: <i>negavi posse mortem immaturam esse consulari, quanto verius nunc negabo seni?</i>, 'I said that death could not be untimely for a man who had been consul; how much more truly shall I now say it for an old man?': if it was true at 43, it is truer at 62, and the question makes the senate supply the answer. <b>2.</b> <i>hoc ipso in templo</i>, 'in this very temple': the pointing word puts the senators back in the temple of Concord in 63 BC, when he last said this and was right, so that his calm about death has a precedent they witnessed. <b>3.</b> The gerundive <i>optanda mors est</i>, 'death is to be wished for', with <i>iam etiam</i>, 'now even', goes beyond not fearing death to wanting it, and the formal address <i>patres conscripti</i> makes the senate witnesses to the vow. <b>4.</b> (alternative) <i>perfuncto rebus eis quas adeptus sum quasque gessi</i>, 'having completed the things I attained and the things I achieved': two relative clauses sum up a finished career, so that a man with nothing left to gain is shown as a man with nothing left to lose.",
+     "scheme": [
+      "Two marks per point, three points: Latin + what Cicero does + effect linked to 'does not fear death'.",
+      "Any three of the four, or other valid points inside lines 4–8 (the tense pair <i>negavi ... negabo</i>; the parallel datives <i>consulari ... seni</i>).",
+      "Stay inside lines 4–8: the opening antithesis and the two wishes are outside the reference."
+     ]
+    },
+    {
+     "id": "a8",
+     "marks": 3,
+     "type": "interp",
+     "q": "Lines 10–11 (<i>alterum ut ... mereatur</i>): 'Cicero's last sentence is a threat, not a wish.' How far do you agree? Give reasons from these lines.",
+     "model": "Largely. It is phrased as a wish (<i>opto</i> governs it, and the subjunctive <i>eveniat</i> is the grammar of wishing) and it names nobody, which lets it pass as a prayer for justice. But 'each man as each deserves of the republic' can only mean one thing in November 44 BC: that Antony, who in Cicero's view has deserved ill of the republic, should get what is coming to him, and the senate is left to supply the name. The form is a wish; the content is a threat, and the calm form makes the threat harder to answer.",
+     "scheme": [
+      "1 mark for a clear verdict.",
+      "1 mark for a reason on the 'wish' side (the grammar, the generality, the prayer-like form) or the 'threat' side (what 'deserves of the republic' must mean; Antony unnamed but obvious).",
+      "1 mark for a developed reason using a specific detail (<i>cuique ... quisque</i>, <i>de re publica</i>, <i>mereatur</i>). A verdict with no reasons earns nothing."
+     ]
+    }
+   ]
+  },
+  {
+   "id": "pb",
+   "title": "Practice set B — the precedent and the two wishes (lines 4–11)",
+   "marks": 23,
+   "intro": "Eight questions, weighted towards the second half of the passage, where the content questions are harder to get right because the Latin is more compressed. 23 marks.",
+   "questions": [
+    {
+     "id": "b1",
+     "marks": 3,
+     "type": "content",
+     "q": "Lines 4–6 (<i>etenim ... consulari</i>): give <b>three</b> details about the earlier occasion Cicero refers to.",
+     "model": "It was nearly twenty years ago (63 BC); it was in this very temple (the temple of Concord, where the senate is meeting); he said that death could not be untimely (premature) for a man who had been consul.",
+     "scheme": [
+      "1 mark: nearly twenty years ago.",
+      "1 mark: in this (very) temple / where the senate is now meeting.",
+      "1 mark: he said death could not be untimely for an ex-consul. 'During the Catiline conspiracy' is true but is not in the lines; it earns nothing on its own."
+     ]
+    },
+    {
+     "id": "b2",
+     "marks": 2,
+     "type": "latin",
+     "q": "Lines 4–6 (<i>etenim ... seni</i>): pick out and translate the Latin word which means 'untimely'.",
+     "model": "<i>immaturam</i> — 'untimely' / 'premature' / 'too early'.",
+     "scheme": [
+      "One mark for <i>immaturam</i>.",
+      "One mark for 'untimely / premature / too early'. 'Immature' is not an acceptable translation here."
+     ]
+    },
+    {
+     "id": "b3",
+     "marks": 4,
+     "type": "style",
+     "q": "Lines 4–6 (<i>etenim ... seni</i>): how does Cicero's language make his argument persuasive? Make <b>two</b> points and refer to the Latin.",
+     "model": "<b>1.</b> The structure <i>si ... quanto verius ...?</i>, 'if ... how much more truly ...?', is an argument from the stronger case: the <i>si</i>-clause gives the weaker case (a consul of 43) and the question the stronger (an old man of 62), so that the senate follows the logic step by step and reaches his conclusion for him. <b>2.</b> <i>negavi ... negabo</i>, 'I said ... I shall say': the same verb in the perfect and the future makes what he said then the guarantee of what he says now, so that consistency over twenty years is offered as proof. <b>3.</b> (alternative) <i>hoc ipso in templo</i>, 'in this very temple': the deixis makes the building a witness; the senators are sitting where they followed him against Catiline.",
+     "scheme": [
+      "Two marks per point: Latin + what Cicero does + effect linked to 'persuasive'.",
+      "Any two of the three, or the parallel datives <i>consulari ... seni</i>.",
+      "Stay inside lines 4–6."
+     ]
+    },
+    {
+     "id": "b4",
+     "marks": 2,
+     "type": "content",
+     "q": "Lines 6–7 (<i>mihi ... est</i>): whom is Cicero addressing, and what does he now say about death?",
+     "model": "The senators (<i>patres conscripti</i>, 'conscript fathers'); death is now even something to be wished for (desired) by him.",
+     "scheme": [
+      "1 mark: the senators / the senate / 'conscript fathers'. 'Antony' is wrong: the <i>tuos</i> of line 2 is not in these lines.",
+      "1 mark: death is to be wished for / desirable / something he wants."
+     ]
+    },
+    {
+     "id": "b5",
+     "marks": 2,
+     "type": "latin",
+     "q": "Lines 7–8 (<i>perfuncto ... gessi</i>): pick out and translate the Latin word which shows that Cicero regards his life's work as finished.",
+     "model": "<i>perfuncto</i> — 'having completed' / 'having finished (with)' / 'having accomplished'.",
+     "scheme": [
+      "One mark for <i>perfuncto</i>.",
+      "One mark for 'having completed / finished / accomplished'. <i>gessi</i>, 'I achieved', is a near miss: it names the deeds, not their completion."
+     ]
+    },
+    {
+     "id": "b6",
+     "marks": 2,
+     "type": "content",
+     "q": "Lines 8–9 (<i>duo modo ... relinquam</i>): what is Cicero's first wish, and when does he want it fulfilled?",
+     "model": "That he may leave the Roman people free; when he dies (<i>moriens</i>, 'dying').",
+     "scheme": [
+      "1 mark: to leave the Roman people free.",
+      "1 mark: at / in his death. 'That everyone gets what they deserve' is the second wish and is outside the reference."
+     ]
+    },
+    {
+     "id": "b7",
+     "marks": 6,
+     "type": "style",
+     "q": "Lines 8–11 (<i>duo modo ... mereatur</i>): how does Cicero's language make his two wishes impressive? Make <b>three</b> points and refer to the Latin.",
+     "model": "<b>1.</b> <i>duo modo haec opto, unum ... alterum</i>, 'I wish for only these two things: one ... the other': the numbering and the restricting word <i>modo</i> give the ending the shape of a will, modest in form, so that the wishes carry the weight of an old man's last requests. <b>2.</b> <i>moriens populum Romanum liberum relinquam</i>, 'that in dying I may leave the Roman people free': <i>liberum</i> is placed last among the words describing the people and before the verb, so that freedom is the one thing that matters, and the participle <i>moriens</i> ties it to his death. <b>3.</b> The parenthesis <i>hoc mihi maius ab dis immortalibus dari nihil potest</i>, 'nothing greater than this can be granted to me by the immortal gods': the aside breaks in as if the thought could not wait, <i>nihil</i> is held back to the end, and the gods make a political wish a prayer. <b>4.</b> (alternative) <i>ita cuique eveniat ut ... quisque mereatur</i>, 'that it may turn out for each man as each deserves': the polyptoton <i>cuique ... quisque</i> gives the curse on Antony the even sound of justice, and the speech ends on <i>re publica</i>.",
+     "scheme": [
+      "Two marks per point, three points: Latin + what Cicero does + effect linked to 'impressive'.",
+      "Any three of the four.",
+      "Stay inside lines 8–11."
+     ]
+    },
+    {
+     "id": "b8",
+     "marks": 2,
+     "type": "interp",
+     "q": "Lines 1–11: what impression do you get of Cicero as a man from this passage? Give <b>one</b> reason.",
+     "model": "That he is proud of his record and sure of his own importance: he quotes his own speech of 63 BC, lists his honours and achievements, and makes his own death the thing that would free Rome. (Also acceptable: that he is brave, since he offers his life to a man who could take it; or that he is consistent, since he claims the same policy at 62 as at 43.)",
+     "scheme": [
+      "1 mark for a clear impression (proud / self-important / brave / consistent / devoted to the republic).",
+      "1 mark for a reason tied to a specific detail from the passage."
+     ]
+    }
+   ]
+  },
+  {
+   "id": "pc",
+   "title": "Practice set C — whole-passage questions and the 8-mark style question",
+   "marks": 26,
+   "intro": "Seven questions that need the whole passage in view, including an 8-mark style question and a paragraph on the question Vivek's examiner is most likely to ask about this text. 26 marks.",
+   "questions": [
+    {
+     "id": "c1",
+     "marks": 8,
+     "type": "style",
+     "q": "Lines 1–4 (<i>defendi ... parturit</i>): how does Cicero's language make this a dramatic opening? Make <b>four</b> points and refer to the Latin.",
+     "model": "<b>1.</b> The balanced antithesis <i>defendi rem publicam adulescens, non deseram senex</i>, 'I defended the republic as a young man; I shall not desert it as an old one': perfect against future, young against old, with no connective, so that a whole career is asserted as fact in one line. <b>2.</b> The exact parallel <i>contempsi Catilinae gladios, non pertimescam tuos</i>, 'I scorned the swords of Catiline; I shall not be terrified of yours': Antony, addressed as <i>tuos</i> though he is not present, is put in Catiline's slot and condemned by the structure, and the concrete <i>gladios</i> makes the threat steel. <b>3.</b> <i>quin etiam corpus libenter obtulerim</i>, 'indeed, I would gladly offer my body': <i>quin etiam</i> signposts the climax and <i>libenter</i>, wedged between <i>corpus</i> and its verb, makes the sacrifice welcome rather than endured. <b>4.</b> The metaphor of childbirth, <i>dolor populi Romani pariat quod iam diu parturit</i>, 'the anguish of the Roman people may give birth to what it has long been labouring to deliver': the polyptoton <i>pariat ... parturit</i> keeps the image physical, and the sentence ends as an exclamation, the passage's emotional peak. <b>5.</b> (alternative) <i>repraesentari morte mea libertas</i>: the commercial verb and the alliteration make his death the cash price of Rome's freedom. <b>6.</b> (alternative) The asyndeton of lines 1–2: four clauses with no connective, each landing as a separate blow.",
+     "scheme": [
+      "Two marks per point, four points: Latin + what Cicero does + effect linked to 'dramatic'.",
+      "Any four of the six, or other valid points inside lines 1–4.",
+      "A device named without an effect earns one mark for that point. Latin without translation or explanation earns nothing."
+     ]
+    },
+    {
+     "id": "c2",
+     "marks": 2,
+     "type": "content",
+     "q": "Lines 9–10 (<i>hoc mihi ... potest</i>): what does Cicero say the immortal gods cannot do?",
+     "model": "They cannot give (grant) him anything greater than this, that is, than leaving the Roman people free.",
+     "scheme": [
+      "1 mark: give / grant him anything greater.",
+      "1 mark: than this / than leaving the Roman people free (the comparison). 'The gods cannot save him' is not in the lines."
+     ]
+    },
+    {
+     "id": "c3",
+     "marks": 2,
+     "type": "latin",
+     "q": "Lines 8–11 (<i>duo modo ... mereatur</i>): pick out and translate the Latin word with which Cicero limits the number of his wishes.",
+     "model": "<i>modo</i> — 'only' / 'just'.",
+     "scheme": [
+      "One mark for <i>modo</i>.",
+      "One mark for 'only / just'. <i>duo</i> gives the number; it does not limit it."
+     ]
+    },
+    {
+     "id": "c4",
+     "marks": 2,
+     "type": "interp",
+     "q": "Lines 7–8 (<i>perfuncto ... gessi</i>): why do you think Cicero mentions his honours and achievements at this point? Give <b>one</b> reason.",
+     "model": "To explain why death is now acceptable to him, and at the same time to remind the senate of what it owes him: a man who has completed everything he set out to gain and to do has nothing left to lose, and the senate hearing the list is reminded that the gains and the deeds were for the republic. (Also acceptable: to build his authority, ethos, before the two wishes.)",
+     "scheme": [
+      "1 mark for a clear reason (nothing left to lose / reminding the senate of his service / building authority).",
+      "1 mark for grounding it in the lines: the two relative clauses, <i>perfuncto</i>, the link to <i>optanda mors est</i>."
+     ]
+    },
+    {
+     "id": "c5",
+     "marks": 3,
+     "type": "interp",
+     "q": "Lines 1–11: Cicero never names Antony in this passage. Explain how this makes his attack more effective. Give <b>two</b> reasons.",
+     "model": "First, the parallel with Catiline does the naming for him: <i>contempsi Catilinae gladios, non pertimescam tuos</i> puts 'yours' in the slot where Catiline's name stood, so Antony is identified as the new traitor by the structure, which is harder to answer than an accusation. Second, the final wish, that each man get what he deserves of the republic, is general enough to pass as a prayer for justice while everyone in the senate supplies Antony's name, so the threat cannot be called a threat. (Also: the one word <i>tuos</i> addresses him directly as if present, which is more contemptuous than naming him.)",
+     "scheme": [
+      "1 mark for each of two clear reasons (the Catiline parallel; the general final wish; the contemptuous <i>tuos</i>).",
+      "1 mark for developing at least one reason with a specific detail from the passage. Reasons without reference to the passage earn one mark at most."
+     ]
+    },
+    {
+     "id": "c6",
+     "marks": 3,
+     "type": "content",
+     "q": "Lines 1–11: give <b>three</b> facts about his own past that Cicero reminds the senate of in this passage.",
+     "model": "He defended the republic as a young man (as consul); he scorned the swords (violent threats) of Catiline; nearly twenty years ago in this temple he said death could not be untimely for an ex-consul; he has attained honours and achieved deeds for the state (any three).",
+     "scheme": [
+      "1 mark per fact, three facts, each from the passage.",
+      "Facts from outside the passage (that he was consul in 63 BC, that he executed the conspirators, that he was called <i>pater patriae</i>) earn nothing unless the passage states them."
+     ]
+    },
+    {
+     "id": "c7",
+     "marks": 6,
+     "type": "essay",
+     "q": "Using this passage only, write <b>one paragraph</b> (about 120–150 words) answering: <i>How does Cicero present himself as a Roman hero?</i> Make a clear point, support it with at least two details from the passage in English, explain each, and end with a sentence that answers the question.",
+     "model": "Cicero presents himself as a hero whose courage is a lifelong record rather than a single deed. He opens by claiming that he defended the republic as a young man and will not desert it as an old one, and that having scorned Catiline's swords he will not fear Antony's: the two halves of his career are set side by side so that consistency itself looks heroic. He then offers to die, gladly, if his death could buy the freedom of the state, and goes further, telling the senate that for a man who has finished his work death is something to be wished for. This is the language of self-sacrifice that Romans admired in soldiers, and he ends by making a free Rome his dying wish and the greatest gift the gods could give him. Cicero's hero, then, is a man who has served the state all his life and is ready to end that life for it, with the twist that the service was done in words.",
+     "scheme": [
+      "Clear point about how he presents himself.",
+      "At least two details from the passage, in English, each explained.",
+      "A concluding sentence that answers the question.",
+      "No Latin needed; stay inside the passage."
+     ]
+    }
+   ]
   }
+ ],
+ "synthesis": {
+  "title": "Using Cicero in the 16-mark essay",
+  "intro": "A likely essay: <i>'A Roman hero is a man who is ready to die for Rome.' How far do the texts and pictures you have studied support this view?</i> You need at least four texts or pictures, in English, with every example linked to the question. Cicero is your clearest case of a hero whose heroism is a readiness to die rather than a deed. Practise the Cicero paragraph here; the plan below shows where it sits in a full answer.<br><br><b>A plan for the full essay:</b> (1) Horatius: ready to die and nearly does, the deed itself; (2) Cicero: ready to die in words, and the words came true; (3) Augustus at Actium: the gods fight for him, so he never has to risk death, which complicates the statement; (4) Sejanus and Mezentius: the villains cling to life and power, the opposite of the statement; (5) Camilla, if you have studied her: dies for her side, which tests whether a woman and an enemy of Rome can count. Conclusion: readiness to die is necessary but the texts add two more tests, that the death is for the state and that the gods approve.",
+  "q": "Write <b>one paragraph</b> (about 130–160 words) on Cicero for that essay. Make a clear point about whether he supports the statement, give at least two specific details from the passage in English, explain each, and end with a sentence that links back to the question. Then add <b>one sentence</b> saying which other text you would use next and why.",
+  "marks": 6,
+  "model": "Cicero supports the statement, but as a hero in words rather than deeds. In the last paragraph of the Second Philippic he tells the senate that he defended the republic as a young man and will not desert it as an old one, and that having scorned Catiline's swords he will not fear Antony's: his courage is presented as a lifelong record, not a single act. He goes further and says he would gladly offer his body if his death could buy the freedom of the state, and that for a man who has finished his career death is actually something to be wished for. This is the language of a martyr, and a reader might call it a boast, except that the threat was real: Antony had him killed a year later, so the readiness to die was proved by events. Cicero therefore fits the statement exactly, with the twist that his weapon was a speech. Horatius would come next, as the hero whose readiness to die is shown in a deed on the bridge rather than in a declaration.",
+  "scheme": [
+   "Clear point about the statement (does Cicero support it, and how).",
+   "At least two specific details from the passage, in English, each explained.",
+   "A link back to the question at the end.",
+   "One sentence naming the next text and giving a reason (comparison or contrast).",
+   "No Latin needed; Latin earns nothing in the essay."
+  ]
+ },
+ "toolkitIntro": "Each entry names a device, says what it is, and shows where it happens in the passage. What it does there, and how to write it up, is for you to work out with your teacher: write your notes, then your own exam sentence (quote, translate, explain, link). An entry gets a tick once your sentence is written."
 };
+
 
 </script>
 <script>
@@ -806,6 +1426,21 @@ const $=id=>document.getElementById(id);
 function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
 function stripHtml(s){ const d=document.createElement('div'); d.innerHTML=String(s||'').replace(/<br\s*\/?>/gi,' '); return (d.textContent||'').replace(/\s+/g,' ').trim(); }
 const CATNAME={ order:"Word order & position", sound:"Sound & rhythm", structure:"Sentence shape & syntax", word:"Choice of words", context:"Fact & context (AO2)" };
+const EDITION="pupil";
+
+const TYPES3={"style":"Style point","content":"Content","essay":"Essay sentence"};
+const HOWTO3={"style":"one point of a style answer: quote the Latin, translate it, say what Cicero has done, link it to the question","content":"in English, from these lines only","essay":"in English, no Latin, linked to the statement"};
+function q3Key(pid,id,k){ return pid+'_'+id+'_q'+(k+1); }
+function q3Html(pid,id,n,teacher){
+  return n.q3.map((x,k)=>{ const key=q3Key(pid,id,k);
+    let s='<div class="q3"><div class="q3h"><span>'+(k+1)+' · '+TYPES3[x.type]+'</span> · '+HOWTO3[x.type]+'</div><div class="q3q">'+x.q+'</div>';
+    if(teacher) s+='<div class="q3m"><b>Model</b>'+(x.model||'')+'</div>';
+    else s+='<textarea data-q3="'+key+'" placeholder="Write it yourself, in full sentences..."></textarea>';
+    return s+'</div>'; }).join('');
+}
+function phraseDone(pid,id){ return [0,1,2].every(k=>(state.answers[q3Key(pid,id,k)]||'').trim()); }
+function tkDone(id){ return !!(state.answers['tk_'+id+'_w']||'').trim(); }
+function markDone(){ if(EDITION!=='pupil') return; document.querySelectorAll('mark.hl').forEach(m=>m.classList.toggle('done3',phraseDone(m.dataset.pid,m.dataset.note))); document.querySelectorAll('details.tk').forEach(t=>t.classList.toggle('done3',tkDone(t.dataset.tk))); }
 const TYPENAME={ content:"Content", latin:"Pick out the Latin", style:"Style", interp:"Impression / judgement", essay:"Essay paragraph" };
 
 /* ===================== state & cloud ===================== */
@@ -813,7 +1448,7 @@ const CLOUD={ endpoint:window.CLASS_STORE.endpoint, token:window.CLASS_STORE.pup
 const LESSON={ id:BOOKLET.id, title:"Booklet "+BOOKLET.num+" — "+stripHtml(BOOKLET.title)+": "+stripHtml(BOOKLET.subtitle) };
 const FIXEDCLS="TUTOR";
 let IDENTITY=null;
-let state={ answers:{}, marks:{}, revealed:{}, read:{}, pnotes:{}, rag:"", opened:{} };
+let state={ answers:{}, marks:{}, revealed:{}, read:{}, pnotes:{}, rag:"", opened:{}, nnotes:{} };
 function userKey(){ return IDENTITY?(IDENTITY.cls+"::"+IDENTITY.cand):"anon"; }
 function fullKey(){ return CLOUD.book+"::"+userKey(); }
 function storeKey(){ return "hv_booklet_"+BOOKLET.num+"_"+(IDENTITY?(IDENTITY.cls+"_"+IDENTITY.cand):"default"); }
@@ -828,7 +1463,7 @@ const CloudStore={
     try{ const r=await fetch(CLOUD.endpoint,{method:"POST",headers:{"x-vestigia-token":CLOUD.token,"Content-Type":"application/json"},
       body:JSON.stringify({key:fullKey(),cls:IDENTITY.cls,cand:IDENTITY.cand,book:CLOUD.book,data:blob,savedAt:new Date().toISOString()})}); return r.ok; }catch(e){ return false; } }
 };
-function mergeState(remote){ if(!remote) return; for(const k of ['answers','marks','revealed','read','pnotes','opened']){ state[k]=Object.assign({},state[k]||{},remote[k]||{}); } if(remote.rag) state.rag=remote.rag; }
+function mergeState(remote){ if(!remote) return; for(const k of ['answers','marks','revealed','read','pnotes','opened','nnotes']){ state[k]=Object.assign({},state[k]||{},remote[k]||{}); } if(remote.rag) state.rag=remote.rag; }
 function loadLocal(){ try{ const s=JSON.parse(safeGet(storeKey())||"null"); if(s) mergeState(s); }catch(e){} }
 let _mt=null;
 function save(){ safeSet(storeKey(),JSON.stringify(state)); if(!IDENTITY) return; setSync("saving"); clearTimeout(_mt);
@@ -849,9 +1484,14 @@ function cloudSummary(){
   allQ().forEach(it=>{ const a=(state.answers[it.key]||'').trim(); const mk=state.marks[it.key]; const g=groups[it.pid];
     total++; g.max+=it.q.marks; max+=it.q.marks; if(a){ answered++; g.answered++; } if(mk!=null){ g.marks+=mk; got+=mk; }
     detail.push({ id:it.key, s:it.pid, sec:it.sec, type:it.q.type, marks:it.q.marks, lat:stripHtml(it.q.q), a:a, m:stripHtml(it.q.model), mk:(mk==null?null:mk), revealed:state.revealed[it.key]||null, opened:state.opened[it.key]||null }); });
+  groups.phr={name:'Phrase questions',answered:0,of:0,marks:0,max:0,notesRead:0,notesTotal:0};
+  BOOKLET.passages.forEach(p=>Object.keys(p.notes).forEach(nid=>{ const n=p.notes[nid]; n.q3.forEach((x,k)=>{ const key=q3Key(p.id,nid,k); const a=(state.answers[key]||'').trim(); groups.phr.of++; if(a) groups.phr.answered++;
+    detail.push({ id:key, s:'phr', sec:'Phrase, line'+(/[–-]/.test(n.ln)?'s ':' ')+n.ln, type:x.type, marks:0, lat:stripHtml(x.q), a:a, m:'', mk:null, revealed:null, opened:state.opened[key]||null, mynotes:k===0?(state.nnotes[p.id+'_'+nid]||''):undefined }); }); }));
+  (BOOKLET.toolkit||[]).forEach(t=>{ const key='tk_'+t.id+'_w'; const a=(state.answers[key]||'').trim(); groups.toolkit.of++; if(a) groups.toolkit.answered++;
+    detail.push({ id:key, s:'toolkit', sec:'Toolkit', type:'style', marks:0, lat:'Toolkit: '+stripHtml(t.name)+' — write one exam sentence', a:a, m:'', mk:null, revealed:null, opened:state.opened[key]||null, mynotes:state.nnotes['tk_'+t.id]||'' }); });
   for(const k in groups){ sections[k]={pts:groups[k].marks,max:groups[k].max,answered:groups[k].answered,of:groups[k].of,notesRead:groups[k].notesRead,notesTotal:groups[k].notesTotal,name:groups[k].name}; }
   return { name:(IDENTITY?IDENTITY.cand:''), lesson:LESSON.id, title:LESSON.title, book:CLOUD.book, booklet:BOOKLET.num,
-    coreGot:got, coreTot:max, answered:answered, total:total, rag:(state.rag||''), pnotes:state.pnotes||{},
+    coreGot:got, coreTot:max, answered:answered, total:total, rag:(state.rag||''), pnotes:state.pnotes||{}, nnotes:state.nnotes||{},
     sections:sections, detail:detail, text:summaryText(groups,got,max,answered,total), savedAt:new Date().toISOString(), state:state };
 }
 function summaryText(g,got,max,answered,total){ let out=LESSON.title+"\n"; for(const k in g){ out+="  "+g[k].name+": "+g[k].answered+"/"+g[k].of+" answered, self-marked "+g[k].marks+"/"+g[k].max+(g[k].notesTotal?(", notes read "+g[k].notesRead+"/"+g[k].notesTotal):"")+"\n"; }
@@ -886,8 +1526,8 @@ function renderToolkit(){
   if(!BOOKLET.toolkit) return '';
   let h='<section class="panel" id="p-toolkit"><div class="card"><div class="ref">Rhetorical devices · recognise, quote, explain</div><h2>The toolkit: the devices the examiner can ask about in this text</h2>';
   h+='<p>'+(BOOKLET.toolkitIntro||'Each entry gives the device, where it happens in the passage, what it does there, and one sentence written in the exam shape: quote, translate, explain, link. Open each one; the booklet records which you have read. Naming a device earns nothing by itself in the exam; the sentence at the end of each entry is the part that earns the marks.')+'</p>';
-  h+='<div class="progress"><span>Devices read: <b id="tkr">0</b>/'+BOOKLET.toolkit.length+'</span></div>';
-  h+=BOOKLET.toolkit.map(t=>'<details class="tk" data-tk="'+t.id+'" ontoggle="toolOpen(this)"><summary><span class="chip '+t.cat+'">'+CATNAME[t.cat]+'</span><span class="tkname">'+t.name+'</span>'+(t.aka?'<span class="aka">'+t.aka+'</span>':'')+'</summary><div class="tkb"><p>'+t.def+'</p><div class="sec">Where it happens</div><div class="tklat">'+t.lat+'</div>'+(t.tr?'<div class="tktr">'+t.tr+'</div>':'')+'<p>'+t.where+'</p><div class="sec">What it does here</div><p>'+t.effect+'</p><div class="sec">Write it like this</div><div class="write">'+t.write+'</div></div></details>').join('');
+  h+='<div class="progress"><span>Sentences written: <b id="tkr">0</b>/'+BOOKLET.toolkit.length+'</span></div>';
+  h+=BOOKLET.toolkit.map(t=>'<details class="tk" data-tk="'+t.id+'" ontoggle="toolOpen(this)"><summary><span class="chip '+t.cat+'">'+CATNAME[t.cat]+'</span><span class="tkname">'+t.name+'</span>'+(t.aka?'<span class="aka">'+t.aka+'</span>':'')+'</summary><div class="tkb"><p>'+t.def+'</p><div class="sec">Where it happens</div><div class="tklat">'+t.lat+'</div>'+(t.tr?'<div class="tktr">'+t.tr+'</div>':'')+'<p>'+t.where+'</p><div class="sec">My notes</div><textarea class="nnotes" data-nn="tk_'+t.id+'" placeholder="What does this device do here? Write down what your teacher explains..."></textarea><div class="sec">Write it yourself</div><div class="tkw"><textarea data-tkw="tk_'+t.id+'_w" placeholder="One exam sentence: quote the Latin, translate it, say what Cicero does, give the effect..."></textarea></div></div></details>').join('');
   h+='</div></section>'; return h;
 }
 function toolOpen(el){ if(!el.open) return; const id=el.dataset.tk; if(!state.read['tk_'+id]){ state.read['tk_'+id]=true; el.classList.add('read'); save(); updateProgress(); } }
@@ -896,8 +1536,8 @@ function renderPassage(p){
   h+='<div class="ref">'+p.author+' · '+p.work+' · '+p.lines+'</div><h2>'+p.heading+'</h2>';
   h+='<p>'+p.intro+'</p>';
   if(p.facts&&p.facts.length){ h+='<details class="facts"><summary>The facts the examiner can ask for</summary><table>'+p.facts.map(f=>'<tr><th>'+f[0]+'</th><td>'+f[1]+'</td></tr>').join('')+'</table></details>'; }
-  h+='<div class="progress"><span>Notes opened: <b id="nr-'+p.id+'">0</b>/'+Object.keys(p.notes).length+'</span><span>Questions answered: <b id="qa-'+p.id+'">0</b>/'+p.questions.length+'</span><span>Self-marked: <b id="qm-'+p.id+'">0</b>/'+p.questions.reduce((a,q)=>a+q.marks,0)+'</span></div>';
-  h+='<div class="legend">'+Object.keys(CATNAME).map(c=>'<span class="lg"><span class="sw '+c+'"></span>'+CATNAME[c]+'</span>').join('')+'<span class="note">Tap a phrase to open its note.</span></div>';
+  h+='<div class="progress"><span>Phrases written up: <b id="nr-'+p.id+'">0</b>/'+Object.keys(p.notes).length+'</span><span>Questions answered: <b id="qa-'+p.id+'">0</b>/'+p.questions.length+'</span><span>Self-marked: <b id="qm-'+p.id+'">0</b>/'+p.questions.reduce((a,q)=>a+q.marks,0)+'</span></div>';
+  h+='<div class="legend">'+Object.keys(CATNAME).map(c=>'<span class="lg"><span class="sw '+c+'"></span>'+CATNAME[c]+'</span>').join('')+'<span class="note">Tap a phrase to open its notes box and questions.</span></div>';
   h+='<div class="textwrap"><div class="text"><div class="thead"><span>Line</span><span>Latin</span><span>English</span></div>';
   h+=p.rows.map(r=>'<div class="row"><div class="ln">'+r.ln+'</div><div class="lat">'+latHtml(p.id,r.lat,r.ln)+'</div><div class="en">'+r.en+'</div></div>').join('');
   h+='</div>';
@@ -946,6 +1586,8 @@ function bind(){
   document.querySelectorAll('mark.hl').forEach(m=>{ m.addEventListener('click',()=>openNote(m.dataset.pid,m.dataset.note)); m.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); openNote(m.dataset.pid,m.dataset.note);} }); });
   document.querySelectorAll('textarea[data-q]').forEach(t=>{ t.addEventListener('input',()=>{ state.answers[t.dataset.q]=t.value; if(!state.opened[t.dataset.q]) state.opened[t.dataset.q]=new Date().toISOString(); wc(t.dataset.q); save(); updateProgress(); }); });
   document.querySelectorAll('textarea[data-pnotes]').forEach(t=>{ t.addEventListener('input',()=>{ state.pnotes[t.dataset.pnotes]=t.value; save(); }); });
+  document.querySelectorAll('#p-toolkit textarea[data-nn]').forEach(t=>{ t.addEventListener('input',()=>{ state.nnotes[t.dataset.nn]=t.value; save(); }); });
+  document.querySelectorAll('textarea[data-tkw]').forEach(t=>{ t.addEventListener('input',()=>{ state.answers[t.dataset.tkw]=t.value; if(!state.opened[t.dataset.tkw]) state.opened[t.dataset.tkw]=new Date().toISOString(); save(); markDone(); updateProgress(); }); });
 }
 function noteOrder(pid){ return Object.keys(BOOKLET.passages.find(p=>p.id===pid).notes); }
 function openNote(pid,id){
@@ -953,19 +1595,20 @@ function openNote(pid,id){
   CUR[pid]=id;
   document.querySelectorAll('#p-'+pid+' mark.hl').forEach(m=>m.classList.toggle('on',m.dataset.note===id));
   const mk=document.querySelector('#p-'+pid+' mark.hl[data-note="'+id+'"]');
-  if(!state.read[pid+'_'+id]){ state.read[pid+'_'+id]=true; if(mk) mk.classList.add('read'); save(); updateProgress(); }
+  if(!state.read[pid+'_'+id]){ state.read[pid+'_'+id]=true; save(); updateProgress(); }
   const ids=noteOrder(pid), i=ids.indexOf(id);
-  let h='<span class="chip '+n.cat+'">'+CATNAME[n.cat]+'</span><div class="ntag">'+n.tag+'</div>'+(n.devices&&n.devices.length?'<div class="devs">'+n.devices.map(d=>'<span class="dev">'+d+'</span>').join('')+'</div>':'');
+  let h='<span class="chip '+n.cat+'">'+CATNAME[n.cat]+'</span><div class="small">Line'+(/[–-]/.test(n.ln)?'s ':' ')+n.ln+'</div>';
   h+='<div class="nlat">'+(mk?mk.innerHTML.replace(/<span class="lb"[^>]*><\/span>/g,' / '):'')+'</div><div class="ntr">'+n.tr+'</div>';
-  h+='<div class="nsec">What the writer does</div><p>'+n.what+'</p><div class="nsec">The effect</div><p>'+n.effect+'</p>';
-  h+='<div class="nsec">How it would be written in the exam</div>';
-  if(n.ex.style) h+='<div class="ex"><div class="exh"><span>Style question</span> · 4, 6 or 8 marks · quote, translate, explain, link</div><p>'+n.ex.style+'</p></div>';
-  if(n.ex.content) h+='<div class="ex"><div class="exh"><span>Content or impression question</span> · in English, from these lines</div><p>'+n.ex.content+'</p></div>';
-  if(n.ex.essay) h+='<div class="ex"><div class="exh"><span>16-mark essay</span> · in English, no Latin needed</div><p>'+n.ex.essay+'</p></div>';
+  h+='<div class="nsec">My notes</div><textarea class="nnotes" data-nn="'+pid+'_'+id+'" placeholder="Write down what your teacher explains: what Cicero does with these words, the device, and the effect..."></textarea>';
+  h+='<div class="nsec">Use it: three questions</div>'+q3Html(pid,id,n,false);
   h+='<div class="nnav"><button class="btn" '+(i<=0?'disabled':'')+' onclick="stepNote(\''+pid+'\',-1)">◀ Previous</button><button class="btn" '+(i>=ids.length-1?'disabled':'')+' onclick="stepNote(\''+pid+'\',1)">Next ▶</button></div>';
-  $('nb-'+pid).innerHTML=h; $('ncnt-'+pid).textContent=(i+1)+' of '+ids.length;
+  $('nb-'+pid).innerHTML=h; $('ncnt-'+pid).textContent=(i+1)+' of '+ids.length; bindPanel(pid);
   const np=$('np-'+pid); np.classList.add('open'); np.scrollTop=0;
   if(window.innerWidth>900){ const r=np.getBoundingClientRect(); if(r.top<0||r.top>window.innerHeight-80) np.scrollIntoView({behavior:'smooth',block:'start'}); }
+}
+function bindPanel(pid){
+  document.querySelectorAll('#nb-'+pid+' textarea[data-q3]').forEach(t=>{ t.value=state.answers[t.dataset.q3]||''; t.addEventListener('input',()=>{ state.answers[t.dataset.q3]=t.value; if(!state.opened[t.dataset.q3]) state.opened[t.dataset.q3]=new Date().toISOString(); save(); markDone(); updateProgress(); }); });
+  document.querySelectorAll('#nb-'+pid+' textarea[data-nn]').forEach(t=>{ t.value=state.nnotes[t.dataset.nn]||''; t.addEventListener('input',()=>{ state.nnotes[t.dataset.nn]=t.value; save(); }); });
 }
 function stepNote(pid,d){ const ids=noteOrder(pid); const i=ids.indexOf(CUR[pid]); const j=i+d; if(j<0||j>=ids.length) return; openNote(pid,ids[j]); const mk=document.querySelector('#p-'+pid+' mark.hl[data-note="'+ids[j]+'"]'); if(mk&&window.innerWidth>900) mk.scrollIntoView({behavior:'smooth',block:'center'}); }
 function closeSheet(){ document.querySelectorAll('.npanel').forEach(n=>n.classList.remove('open')); }
@@ -987,16 +1630,19 @@ function setRag(v){ state.rag=v; save(); document.querySelectorAll('.rag button'
 function restoreAll(){
   document.querySelectorAll('textarea[data-q]').forEach(t=>{ t.value=state.answers[t.dataset.q]||''; wc(t.dataset.q); if(state.revealed[t.dataset.q]) showRevealed(t.dataset.q); });
   document.querySelectorAll('textarea[data-pnotes]').forEach(t=>{ t.value=state.pnotes[t.dataset.pnotes]||''; });
+  document.querySelectorAll('#p-toolkit textarea[data-nn]').forEach(t=>{ t.value=state.nnotes[t.dataset.nn]||''; });
+  document.querySelectorAll('textarea[data-tkw]').forEach(t=>{ t.value=state.answers[t.dataset.tkw]||''; });
+  markDone(); Object.keys(CUR).forEach(pid=>{ if(CUR[pid]) bindPanel(pid); });
   document.querySelectorAll('mark.hl').forEach(m=>m.classList.toggle('read',!!state.read[m.dataset.pid+'_'+m.dataset.note]));
   document.querySelectorAll('details.tk').forEach(t=>t.classList.toggle('read',!!state.read['tk_'+t.dataset.tk]));
   if(state.rag) document.querySelectorAll('.rag button').forEach(b=>b.classList.toggle('on',b.textContent.startsWith(state.rag)));
   updateProgress();
 }
 function updateProgress(){
-  if(BOOKLET.toolkit){ const tr=BOOKLET.toolkit.filter(t=>state.read['tk_'+t.id]).length; const el=$('tabdone-toolkit'); if(el) el.textContent=(tr===BOOKLET.toolkit.length)?' ✓':(tr?(' '+tr+'/'+BOOKLET.toolkit.length):''); const c=$('tkr'); if(c) c.textContent=tr; }
+  if(BOOKLET.toolkit){ const tr=BOOKLET.toolkit.filter(t=>tkDone(t.id)).length; const el=$('tabdone-toolkit'); if(el) el.textContent=(tr===BOOKLET.toolkit.length)?' ✓':(tr?(' '+tr+'/'+BOOKLET.toolkit.length):''); const c=$('tkr'); if(c) c.textContent=BOOKLET.toolkit.filter(t=>tkDone(t.id)).length; }
   let answered=0,total=0,got=0,max=0;
   BOOKLET.passages.forEach(p=>{ let a=0,m=0,mx=0; p.questions.forEach(q=>{ const k=p.id+'_'+q.id; total++; mx+=q.marks; if((state.answers[k]||'').trim()){ a++; answered++; } if(state.marks[k]!=null){ m+=state.marks[k]; got+=state.marks[k]; } }); max+=mx;
-    const nr=Object.keys(p.notes).filter(k=>state.read[p.id+'_'+k]).length;
+    const nr=Object.keys(p.notes).filter(k=>phraseDone(p.id,k)).length;
     $('nr-'+p.id).textContent=nr; $('qa-'+p.id).textContent=a; $('qm-'+p.id).textContent=m;
     $('tabdone-'+p.id).textContent=(a===p.questions.length&&a>0)?' ✓':(a?(' '+a+'/'+p.questions.length):''); });
   (BOOKLET.practice||[]).forEach(s=>{ let a=0,m=0; s.questions.forEach(q=>{ const k='prac_'+s.id+'_'+q.id; total++; max+=q.marks; if((state.answers[k]||'').trim()){ a++; answered++; } if(state.marks[k]!=null){ m+=state.marks[k]; got+=state.marks[k]; } }); const el=$('pqa-'+s.id); if(el) el.textContent=a; const em=$('pqm-'+s.id); if(em) em.textContent=m; });
